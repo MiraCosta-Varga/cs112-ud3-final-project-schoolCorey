@@ -12,7 +12,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.skin.ComboBoxListViewSkin;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -93,7 +95,7 @@ public class CardRewardInput {
                 }
                 if(currentBox.getItems().get(i).getName().toLowerCase().contains(currentText.toLowerCase())){
                     currentBox.getSelectionModel().select(i);
-                    if(keyEvent.getCode()!=KeyCode.ENTER){
+                    if(keyEvent.getCode()!=KeyCode.ENTER ){ //&& keyEvent.getCode()!= KeyCode.TAB
                         currentEditor.setText(currentText);
                         currentEditor.positionCaret(currentEditor.getText().length());
                     }else {
@@ -130,6 +132,47 @@ public class CardRewardInput {
 
     }
 
+    private void specificComboBoxAction(ComboBox<DMCard> currentBox, Node nextFocus, ImageView currentImage, int rewardIndex){
+        if(comboBoxAutocomplete(currentBox)){
+            nextFocus.requestFocus();
+            try{
+                DMCard currentCard = currentBox.getSelectionModel().getSelectedItem();
+                int idNum = currentCard.getIdNum();
+                String selection = Integer.toString(idNum);
+                if(idNum>-1){
+                    String filepath = "/cs112/ud3/cardImages/" +selection+".png";
+                    Image newImage = new Image(getClass().getResourceAsStream(filepath));
+                    currentImage.setImage(newImage);
+                    selectedCards[rewardIndex] = currentCard;
+                }
+            }catch (ClassCastException cce){
+                System.out.println("Misspelling");
+            }catch (NullPointerException npe){
+                System.out.println("Nullpo. Probably caused by a missing image file.");
+            }
+        }
+        //TODO: uncomment image stuff
+        /*
+        try{
+            DMCard currentCard = currentBox.getSelectionModel().getSelectedItem();
+            int idNum = currentCard.getIdNum();
+            String selection = Integer.toString(idNum);
+            if(idNum>-1){
+                //String filepath = "/cs112/ud3/cardImages/" +selection+".png";
+                //Image newImage = new Image(getClass().getResourceAsStream(filepath));
+                //currentImage.setImage(newImage);
+                selectedCards[rewardIndex] = currentCard;
+            }
+        }catch (ClassCastException cce){
+            System.out.println("Misspelling");
+        }catch (NullPointerException npe){
+            System.out.println("Nullpo. Probably caused by a missing image file.");
+        }
+
+         */
+
+    }
+
     //True if selection changes, false if it doesn't
     /**
      * Checks the currently-inputted value of the selected ComboBox, and automaticlaly selects an
@@ -145,38 +188,17 @@ public class CardRewardInput {
         for (int i=0; i<currentBox.getItems().size(); i++){
             if(currentBox.getItems().get(i).getName().toLowerCase().contains(currentText.toLowerCase())){
                 currentBox.getSelectionModel().select(i);
+                ComboBoxListViewSkin<?> currentSkin = (ComboBoxListViewSkin<?>) currentBox.getSkin();
+                ListView<?> list = (ListView<?>) currentSkin.getPopupContent();
+                list.scrollTo(i);
                 currentEditor.setText(currentText);
                 currentEditor.positionCaret(currentEditor.getText().length());
+                return currentIndex != currentBox.getSelectionModel().getSelectedIndex();
             }
         }
         return currentIndex != currentBox.getSelectionModel().getSelectedIndex();
     }
 
-    private void specificComboBoxAction(ComboBox<DMCard> currentBox, Node nextFocus, ImageView currentImage, int rewardIndex){
-        currentBox = currentBox;// = cardRewardComboBox1;
-        if(comboBoxAutocomplete(currentBox)){
-            nextFocus.requestFocus();
-        }
-        try{
-            DMCard currentCard = currentBox.getSelectionModel().getSelectedItem();
-            int idNum = currentCard.getIdNum();
-            String selection = Integer.toString(idNum);
-            if(idNum>-1){
-                String filepath = "/cs112/ud3/cardImages/" +selection+".png";
-                //Testing new above, old below
-                //String filepath = "/cardImages/"+selection+".png";
-                Image newImage = new Image(getClass().getResourceAsStream(filepath));
-                currentImage.setImage(newImage);
-                selectedCards[rewardIndex] = currentCard;
-
-            }
-        }catch (ClassCastException cce){
-            System.out.println("Misspelling");
-        }catch (NullPointerException npe){
-            //System.out.println("Nullpo. Should only be caused by no images yet, but please check.");
-        }
-
-    }
 
     //TODO: (UD3)change button functions depending on whether this scene came from addevents or viewevents
     //Buttons
