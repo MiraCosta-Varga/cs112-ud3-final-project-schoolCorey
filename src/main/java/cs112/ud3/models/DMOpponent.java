@@ -3,7 +3,7 @@ package cs112.ud3.models;
 import cs112.ud3.UtilityBelt;
 
 public class DMOpponent {
-    public static final String[] VALID_LOCATIONS ={"Park","Library","Card shop"};
+    public static final String[] VALID_LOCATIONS ={"Card Shop","Restaurant","Park","School","Mall","Junkyard", "Power Plant", "Museum", "Library", "Forest Preserve","Tournament Hall"};
     public static final String DEFAULT_NAME = "Nobody";
     public static final String DEFAULT_LOCATION = "Nowhere";
 

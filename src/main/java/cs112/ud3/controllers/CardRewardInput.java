@@ -59,10 +59,6 @@ public class CardRewardInput {
     @FXML
     private Button cancelButton;
 
-    //TODO: move image view set to when enter/tab is pressed, so that it doesn't lag as you're typing.
-
-
-
     public void initializeData(){
         //TODO: Make alphabetically ordered version
         CardLink link = new CardLink();
@@ -151,26 +147,6 @@ public class CardRewardInput {
                 System.out.println("Nullpo. Probably caused by a missing image file.");
             }
         }
-        //TODO: uncomment image stuff
-        /*
-        try{
-            DMCard currentCard = currentBox.getSelectionModel().getSelectedItem();
-            int idNum = currentCard.getIdNum();
-            String selection = Integer.toString(idNum);
-            if(idNum>-1){
-                //String filepath = "/cs112/ud3/cardImages/" +selection+".png";
-                //Image newImage = new Image(getClass().getResourceAsStream(filepath));
-                //currentImage.setImage(newImage);
-                selectedCards[rewardIndex] = currentCard;
-            }
-        }catch (ClassCastException cce){
-            System.out.println("Misspelling");
-        }catch (NullPointerException npe){
-            System.out.println("Nullpo. Probably caused by a missing image file.");
-        }
-
-         */
-
     }
 
     //True if selection changes, false if it doesn't

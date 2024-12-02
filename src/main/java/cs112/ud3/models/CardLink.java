@@ -1,5 +1,6 @@
 package cs112.ud3.models;
 
+import cs112.ud3.Exceptions.UninitializedLinkException;
 import cs112.ud3.UtilityBelt;
 
 import java.io.FileInputStream;
@@ -136,7 +137,10 @@ public class CardLink extends ValidLink {
     }
 
     @Override
-    public boolean objectIsValid(Object candidate){
+    public boolean objectIsValid(Object candidate) throws UninitializedLinkException {
+        if(validCards==null){
+            throw new UninitializedLinkException();
+        }
         if(candidate==null||!(candidate instanceof DMCard)){
             return false;
         }else{

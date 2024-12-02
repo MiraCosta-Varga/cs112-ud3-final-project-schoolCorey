@@ -2,6 +2,7 @@ package cs112.ud3.controllers;
 
 import cs112.ud3.InitialView;
 import cs112.ud3.models.DMOpponent;
+import cs112.ud3.models.OpponentLink;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,10 +29,19 @@ public class OpponentInput {
 
     public void initializeData(){
         //TODO: (UD3) Populate combo boxes w/ valid location and names
+        //OpponentLink link = new OpponentLink();
         for(String location: DMOpponent.VALID_LOCATIONS){
             locationComboBox.getItems().add(location);
         }
+        for(DMOpponent possibleOpponent : OpponentLink.knownOpponents){
+            String name = possibleOpponent.getName();
+            nameComboBox.getItems().add(name);
+        }
     }
+
+
+
+
 
     @FXML
     public void onBackClick(ActionEvent event){
