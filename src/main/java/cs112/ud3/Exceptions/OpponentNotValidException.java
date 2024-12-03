@@ -5,4 +5,5 @@ public class OpponentNotValidException extends Exception {
     public OpponentNotValidException(){
         super(DEFAULT_MESSAGE);
     }
+    public OpponentNotValidException(String message){super(message);}
 }

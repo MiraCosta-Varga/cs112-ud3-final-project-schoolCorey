@@ -2,6 +2,8 @@ package cs112.ud3.models;
 
 import cs112.ud3.UtilityBelt;
 
+import java.util.Arrays;
+
 public class DMOpponent {
     public static final String[] VALID_LOCATIONS ={"Card Shop","Restaurant","Park","School","Mall","Junkyard", "Power Plant", "Museum", "Library", "Forest Preserve","Tournament Hall"};
     public static final String DEFAULT_NAME = "Nobody";
@@ -121,8 +123,9 @@ public class DMOpponent {
             return false;
         } else{
             DMOpponent otherOpp = (DMOpponent) other;
+            boolean decklistsAreEqual = (this.decklist==null && otherOpp.decklist ==null) || Arrays.equals(this.decklist, otherOpp.decklist);
             return this.name.equals(otherOpp.name) && (this.location==otherOpp.location)
-                    && (this.decklist.equals(otherOpp.decklist));
+                    && decklistsAreEqual;
         }
     }
 }

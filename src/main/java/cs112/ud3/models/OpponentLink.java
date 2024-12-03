@@ -92,8 +92,9 @@ public class OpponentLink extends CardLink{
      * @throws UninitializedLinkException if the knownOpponents array has not been created or has been deleted before this was called.
      */
     public DMOpponent linkOpponent(String name, String location) throws OpponentNotValidException{
-        DMOpponent opponent = new DMOpponent(name,location);
+
         try{
+            DMOpponent opponent = new DMOpponent(name,location);
             int opponentIndex = opponentIsValid(opponent);
             if(opponentIndex==-1){
                 throw new OpponentNotValidException();
@@ -103,6 +104,8 @@ public class OpponentLink extends CardLink{
         }catch (UninitializedLinkException ule){
             System.err.println(ule.getMessage());
             return null;
+        }catch (IllegalArgumentException iae){
+            throw new OpponentNotValidException("Opponent not valid due to invalid name or location");
         }
 
     }

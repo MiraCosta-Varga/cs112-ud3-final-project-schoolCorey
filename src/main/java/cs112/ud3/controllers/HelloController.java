@@ -1,6 +1,7 @@
 package cs112.ud3.controllers;
 
 import cs112.ud3.InitialView;
+import cs112.ud3.models.RewardEvent;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,7 +29,8 @@ public class HelloController {
         Parent opponentInputParent = loader.load();
 
         OpponentInput opponentInput = loader.getController();
-        opponentInput.initializeData();
+        RewardEvent event = new RewardEvent();
+        opponentInput.initializeData(event,true);
 
         Stage stage = new Stage();
         stage.initModality(Modality.APPLICATION_MODAL);

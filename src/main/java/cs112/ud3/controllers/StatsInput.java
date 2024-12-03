@@ -1,6 +1,7 @@
 package cs112.ud3.controllers;
 
 import cs112.ud3.InitialView;
+import cs112.ud3.models.DMBattleStats;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -30,7 +31,7 @@ public class StatsInput {
     @FXML
     private TextField creaturesOTextField;
     @FXML
-    private TextField sheidlsYTextField;
+    private TextField shieldsYTextField;
     @FXML
     private  TextField shieldsOTextField;
     @FXML
@@ -59,7 +60,7 @@ public class StatsInput {
             repTextField.setEditable(false);
             creaturesOTextField.setEditable(false);
             creaturesYTextField.setEditable(false);
-            sheidlsYTextField.setEditable(false);
+            shieldsYTextField.setEditable(false);
             shieldsOTextField.setEditable(false);
             mWinsOTextField.setEditable(false);
             mWinsYTextField.setEditable(false);
@@ -77,7 +78,7 @@ public class StatsInput {
         repTextField.setTextFormatter(new TextFormatter<>(new IntegerStringConverter()));
         creaturesOTextField.setTextFormatter(new TextFormatter<>(new IntegerStringConverter()));
         creaturesYTextField.setTextFormatter(new TextFormatter<>(new IntegerStringConverter()));
-        sheidlsYTextField.setTextFormatter(new TextFormatter<>(new IntegerStringConverter()));
+        shieldsYTextField.setTextFormatter(new TextFormatter<>(new IntegerStringConverter()));
         shieldsOTextField.setTextFormatter(new TextFormatter<>(new IntegerStringConverter()));
         mWinsOTextField.setTextFormatter(new TextFormatter<>(new IntegerStringConverter()));
         mWinsYTextField.setTextFormatter(new TextFormatter<>(new IntegerStringConverter()));
@@ -114,17 +115,38 @@ public class StatsInput {
     }
 
     public void onNextClick(ActionEvent actionEvent) throws IOException{
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(InitialView.class.getResource("confirm-page.fxml"));
-        Parent confirmParent = loader.load();
+        try{
+            int creaturesLostPlayer = Integer.parseInt(creaturesYTextField.getText());
+            int creaturesLostOpp = Integer.parseInt(creaturesOTextField.getText());
+            int shieldsLostPlayer = Integer.parseInt(shieldsYTextField.getText());
+            int shieldsLostOpp = Integer.parseInt(shieldsOTextField.getText());
+            int playerWinsLocal = Integer.parseInt(mWinsYTextField.getText());
+            int playerLossesLocal = Integer.parseInt(mWinsOTextField.getText());
+            int playerWinsTotal = Integer.parseInt(tWinsYTextField.getText());
+            int playerLossesTotal = Integer.parseInt(tWinsOTextField.getText());
+            int minutes = Integer.parseInt(minuteTextField.getText());
+            int seconds = Integer.parseInt(secondTextField.getText());
+            DMBattleStats stats = new DMBattleStats(creaturesLostPlayer,creaturesLostOpp,shieldsLostPlayer,shieldsLostOpp,playerWinsLocal,playerLossesLocal,playerWinsTotal,playerLossesTotal,minutes,seconds);
 
-        ConfirmPage confirmPage = loader.getController();
-        confirmPage.initializeData(addingEvent);
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(InitialView.class.getResource("confirm-page.fxml"));
+            Parent confirmParent = loader.load();
 
-        Scene confirmScene = new Scene(confirmParent);
-        Stage window = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
-        window.setScene(confirmScene);
-        window.show();
+            ConfirmPage confirmPage = loader.getController();
+            confirmPage.initializeData(addingEvent);
+
+            Scene confirmScene = new Scene(confirmParent);
+            Stage window = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
+            window.setScene(confirmScene);
+            window.show();
+        }catch (NumberFormatException nfe){
+            //TODO: make popup with message for error
+            System.out.println("Most likely one or more fields missing");
+        }catch (IllegalArgumentException iae){
+            //TODO: make popup
+            System.out.println(iae.getMessage());
+        }
+
     }
 
 }

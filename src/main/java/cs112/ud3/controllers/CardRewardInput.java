@@ -128,6 +128,16 @@ public class CardRewardInput {
 
     }
 
+    /**
+     * Called from onComboBoxAction, takes params to update components of specific boxes. Autocompletes, and updates the
+     * image corresponding to the current box if enter is pressed.
+     * @param currentBox the combo box that the action was taken in
+     * @param nextFocus the next component to request focus when this box is completed. Usually the next combo box, but
+     *                  should be the next button if you're on box 3
+     * @param currentImage the ImageView object corresponding to the combo box the action was taken in
+     * @param rewardIndex the index number of the selectedCards array that corresponds to the combo box that the action was taken in.
+     *                    see CARD_X_INDEX constants; example: CARD_1_INDEX is for the card linked to cardRewardComboBox1
+     */
     private void specificComboBoxAction(ComboBox<DMCard> currentBox, Node nextFocus, ImageView currentImage, int rewardIndex){
         if(comboBoxAutocomplete(currentBox)){
             nextFocus.requestFocus();

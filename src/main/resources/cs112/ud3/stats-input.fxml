@@ -84,7 +84,7 @@
                         <Font name="High Tower Text" size="18.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="sheidlsYTextField" maxWidth="-Infinity" prefHeight="26.0" prefWidth="220.0" text="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                  <TextField fx:id="shieldsYTextField" maxWidth="-Infinity" prefHeight="26.0" prefWidth="220.0" text="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                   <TextField fx:id="shieldsOTextField" maxWidth="-Infinity" prefWidth="220.0" text="0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                </children>
             </GridPane>
