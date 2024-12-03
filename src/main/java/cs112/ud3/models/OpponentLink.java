@@ -77,7 +77,9 @@ public class OpponentLink extends CardLink{
 
         while (!isPresent && (location < knownOpponents.length)) {
             isPresent = knownOpponents[location].equals(candidate);
-            location++;
+            if(!isPresent){
+                location++;
+            }
         }
         if(!isPresent) location = -1;
         return location;
@@ -91,7 +93,7 @@ public class OpponentLink extends CardLink{
      * @throws OpponentNotValidException if there is no opponent in the DMOpponents array with the given combination of name and location
      * @throws UninitializedLinkException if the knownOpponents array has not been created or has been deleted before this was called.
      */
-    public DMOpponent linkOpponent(String name, String location) throws OpponentNotValidException{
+    public DMOpponent linkOpponent(String name, String location) throws OpponentNotValidException, UninitializedLinkException{
 
         try{
             DMOpponent opponent = new DMOpponent(name,location);

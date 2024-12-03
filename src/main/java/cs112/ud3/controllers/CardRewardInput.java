@@ -1,9 +1,12 @@
 package cs112.ud3.controllers;
 
+import cs112.ud3.Exceptions.CardNotValidException;
+import cs112.ud3.Exceptions.UninitializedLinkException;
 import cs112.ud3.InitialView;
 import cs112.ud3.models.CardLink;
 import cs112.ud3.models.DMCard;
 import cs112.ud3.models.DMCreature;
+import cs112.ud3.models.RewardEvent;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,21 +28,20 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class CardRewardInput {
-    //Setup that would really be from another class
-    /*
-    public static final DMCard[] testAllPossibleCards =  {new DMCreature("Belbetphlo, Wailing Shadow", DMCard.CIVILIZATION_DARKNESS,DMCard.CARDTYPE_CREATURE,"Slayer",DMCard.RARITY_COMMON,3,false,1000,DMCreature.RACE_GHOST,false,0),
-            new DMCreature("Bloody Squito",DMCard.CIVILIZATION_DARKNESS,DMCard.CARDTYPE_CREATURE,"Blocker\nCan't Attack\nAfter this creature battles, destroy it.",DMCard.RARITY_COMMON,2,false,4000,DMCreature.RACE_GEL_FISH,false,1),
-            new DMCreature("Alpha Squito",DMCard.CIVILIZATION_DARKNESS,DMCard.CARDTYPE_CREATURE,"Blocker\nCan't Attack\nAfter this creature battles, destroy it.",DMCard.RARITY_COMMON,2,false,4000,DMCreature.RACE_GEL_FISH,false,1)};
-    */
-
+    /***CONSTANTS***/
     public static final int CARD_1_INDEX = 0;
     public static final int CARD_2_INDEX = 1;
     public static final int CARD_3_INDEX = 2;
+    public static final int NOT_FOUND = -1;
+    public static final int CARDS_PER_EVENT = 3;
 
+    /***INSTANCE VARS***/
     //used to hold onto our combo box selections until we confirm our choices.
-    private DMCard[] selectedCards = new DMCard[3];
+    private DMCard[] selectedCards = new DMCard[CARDS_PER_EVENT];
+    private RewardEvent rewardEvent;
+    private boolean amAddingEvent;
 
-    //GUI components
+    /***GUI components***/
     @FXML
     private ComboBox<DMCard> cardRewardComboBox1 = new ComboBox<>();
     @FXML
@@ -59,7 +61,18 @@ public class CardRewardInput {
     @FXML
     private Button cancelButton;
 
-    public void initializeData(){
+    /**
+     * Sets up scence before it is shown. Populates combo boxes with valid choices, updates them to match
+     * the event which has been passed if applicable, and sets whether the user is adding an event or not,
+     * disabling the combo boxes if they are not.
+     * @param rewardEvent The current event that is being tracked in this window.
+     * @param amAddingEvent true if the user is currently adding an event, false if they are viewing an event.
+     */
+    public void initializeData(RewardEvent rewardEvent, boolean amAddingEvent){
+
+        this.rewardEvent = rewardEvent;
+        this.amAddingEvent = amAddingEvent;
+
         //TODO: Make alphabetically ordered version
         CardLink link = new CardLink();
         for(DMCard card: link.getValidCards()){
@@ -67,6 +80,71 @@ public class CardRewardInput {
             cardRewardComboBox3.getItems().add(card);
             cardRewardComboBox2.getItems().add(card);
         }
+
+        //copies card drops if they exist
+        DMCard[] drops = rewardEvent.getItemDrops();
+        if(drops!=null){
+            for (int i = 0; i < drops.length; i++){
+                DMCard original = drops[i];
+                selectedCards[i] = original;
+                if(original!=null){
+                    int index;
+                    ComboBox<DMCard> currentBox = null;
+                    ImageView currentImage = null;
+                    switch (i){
+                        case CARD_1_INDEX:
+                            index = findCardInComboBox(cardRewardComboBox1,original);
+                            if (index!=-1){
+                                cardRewardComboBox1.getSelectionModel().select(index);
+                                currentBox = cardRewardComboBox1;
+                                currentImage = card1image;
+                            }
+                            break;
+                        case CARD_2_INDEX:
+                            index = findCardInComboBox(cardRewardComboBox2,original);
+                            if (index!=-1){
+                                cardRewardComboBox2.getSelectionModel().select(index);
+                                currentBox = cardRewardComboBox2;
+                                currentImage = card2image;
+                            }
+                            break;
+                        case CARD_3_INDEX:
+                            index = findCardInComboBox(cardRewardComboBox3,original);
+                            if (index!=-1){
+                                cardRewardComboBox3.getSelectionModel().select(index);
+                                currentBox = cardRewardComboBox3;
+                                currentImage = card3image;
+                            }
+                            break;
+                        default: break;
+                    }
+                    if(currentBox!=null){
+                        try{
+                            DMCard currentCard = currentBox.getSelectionModel().getSelectedItem();
+                            int idNum = currentCard.getIdNum();
+                            String selection = Integer.toString(idNum);
+                            if(idNum>-1){
+                                String filepath = "/cs112/ud3/cardImages/" +selection+".png";
+                                Image newImage = new Image(getClass().getResourceAsStream(filepath));
+                                currentImage.setImage(newImage);
+                            }
+                        }catch (ClassCastException cce){
+                            System.out.println("Misspelling");
+                        }catch (NullPointerException npe){
+                            System.out.println("Nullpo. Probably caused by a missing image file.");
+                        }
+                    }
+
+                }
+            }
+        }
+
+        if(!amAddingEvent){
+            cardRewardComboBox1.setDisable(true);
+            cardRewardComboBox2.setDisable(true);
+            cardRewardComboBox3.setDisable(true);
+        }
+
     }
 
     //ok, so I guess enter is consumed on the action event or something?
@@ -171,30 +249,67 @@ public class CardRewardInput {
         TextField currentEditor = currentBox.getEditor();
         int currentIndex = currentBox.getSelectionModel().getSelectedIndex();
         String currentText = currentEditor.getText();
+        findInComboBox(currentBox,currentText);
+        return currentIndex != currentBox.getSelectionModel().getSelectedIndex();
+    }
+
+    /**
+     * Takes a string and checks if a DMCard combo box contains a card corresponding to that string.
+     * @param currentBox The box to search for.
+     * @param textToFind The text to search for (the name of the DMCard or a portion of its name)
+     * @return true if corresponding card is found in the combo box, false if it is not.
+     */
+    private boolean findInComboBox(ComboBox<DMCard> currentBox, String textToFind){
+        TextField currentEditor = currentBox.getEditor();
         for (int i=0; i<currentBox.getItems().size(); i++){
-            if(currentBox.getItems().get(i).getName().toLowerCase().contains(currentText.toLowerCase())){
+            if(currentBox.getItems().get(i).getName().toLowerCase().contains(textToFind.toLowerCase())){
                 currentBox.getSelectionModel().select(i);
                 ComboBoxListViewSkin<?> currentSkin = (ComboBoxListViewSkin<?>) currentBox.getSkin();
                 ListView<?> list = (ListView<?>) currentSkin.getPopupContent();
                 list.scrollTo(i);
-                currentEditor.setText(currentText);
+                currentEditor.setText(textToFind);
                 currentEditor.positionCaret(currentEditor.getText().length());
-                return currentIndex != currentBox.getSelectionModel().getSelectedIndex();
+                return true;
+                //return currentIndex != currentBox.getSelectionModel().getSelectedIndex();
             }
         }
-        return currentIndex != currentBox.getSelectionModel().getSelectedIndex();
+        return false; //not found
     }
 
+    /**
+     * Checks if a combo box contains the specified card, and returns the index if it is.
+     * @param currentBox The DMCard ComboBox to check for the specified card
+     * @param cardToFind The DMCard object to look for
+     * @return an int for the index of currentBox.getItems() where the card is, or -1 if it is not found in the box.
+     */
+    private int findCardInComboBox(ComboBox<DMCard> currentBox, DMCard cardToFind){
+        for(int i = 0; i < currentBox.getItems().size(); i++){
+            DMCard check = currentBox.getItems().get(i);
+            if(check.equals(cardToFind)){
+                return i;
+            }
+        }
+        return NOT_FOUND;
+    }
 
-    //TODO: (UD3)change button functions depending on whether this scene came from addevents or viewevents
-    //Buttons
+    /*** SCENE CHANGE BUTTONS ***/
+
+
     @FXML
     void onBackClick(ActionEvent actionEvent) throws IOException {
-        //TODO: (UD3)send back Opponent selected from previous page and refill it on that page. Maybe another initializeData()?
-        Parent opponentInput = FXMLLoader.load(InitialView.class.getResource("opponent-input.fxml"));
-        Scene opponentInputScene = new Scene(opponentInput);
+        //Back button will NOT update reward event with current card selections.
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(InitialView.class.getResource("opponent-input.fxml"));
+        Parent opponentInputParent = loader.load();
+
+        OpponentInput opponentInput = loader.getController();
+        opponentInput.initializeData(rewardEvent,amAddingEvent);
+
+
+        //Parent cardInput = FXMLLoader.load(InitialView.class.getResource("card-reward-input.fxml"));
+        Scene cardRewardScene = new Scene(opponentInputParent); //was cardInput
         Stage window = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
-        window.setScene(opponentInputScene);
+        window.setScene(cardRewardScene);
         window.show();
     }
 
@@ -219,19 +334,55 @@ public class CardRewardInput {
     @FXML
     void  onNextClick(ActionEvent actionEvent) throws  IOException{
         //TODO: (UD3) Make sure all cards are selected before continuing
+        if(amAddingEvent){
+            try {
+                //try adding cards to event
+                CardLink link = new CardLink();
+                for(int i = 0; i <CARDS_PER_EVENT; i++ ){
+                    if(!link.objectIsValid(selectedCards[i])){
+                        throw new CardNotValidException();
+                    }
+                    rewardEvent.addDrop(selectedCards[i],i);
+                }
 
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(InitialView.class.getResource("stats-input.fxml"));
-        Parent statsParent = loader.load();
+                //Move to next scene
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(InitialView.class.getResource("stats-input.fxml"));
+                Parent statsParent = loader.load();
 
-        StatsInput statsInput = loader.getController();
-        statsInput.initializeData(true);
+                StatsInput statsInput = loader.getController();
+                statsInput.initializeData(rewardEvent ,amAddingEvent);
 
-        Scene opponentInputScene = new Scene(statsParent);
-        // initializeData() goes here
-        Stage window = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
-        window.setScene(opponentInputScene);
-        window.show();
+                Scene opponentInputScene = new Scene(statsParent);
+                // initializeData() goes here
+                Stage window = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
+                window.setScene(opponentInputScene);
+                window.show();
+
+
+            }catch (UninitializedLinkException ule){
+                System.err.println(ule.getMessage());
+            }catch (CardNotValidException cnve){
+                //Todo: make popup
+                System.out.println(cnve.getMessage());
+            }
+        }else {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(InitialView.class.getResource("stats-input.fxml"));
+            Parent statsParent = loader.load();
+
+            StatsInput statsInput = loader.getController();
+            statsInput.initializeData(rewardEvent ,amAddingEvent);
+
+            Scene opponentInputScene = new Scene(statsParent);
+            // initializeData() goes here
+            Stage window = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
+            window.setScene(opponentInputScene);
+            window.show();
+        }
+
+
+
 
     }
 

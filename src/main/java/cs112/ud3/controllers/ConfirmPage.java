@@ -1,6 +1,7 @@
 package cs112.ud3.controllers;
 
 import cs112.ud3.InitialView;
+import cs112.ud3.models.RewardEvent;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -53,7 +54,8 @@ public class ConfirmPage {
         Parent statsParent = loader.load();
 
         StatsInput statsInput = loader.getController();
-        statsInput.initializeData(addingEvent);
+        //TODO: unstub this
+        statsInput.initializeData(new RewardEvent(),addingEvent);
 
         Scene opponentInputScene = new Scene(statsParent);
         Stage window = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();

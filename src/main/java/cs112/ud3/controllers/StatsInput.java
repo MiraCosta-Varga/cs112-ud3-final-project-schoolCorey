@@ -2,6 +2,7 @@ package cs112.ud3.controllers;
 
 import cs112.ud3.InitialView;
 import cs112.ud3.models.DMBattleStats;
+import cs112.ud3.models.RewardEvent;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,12 +18,15 @@ import javafx.util.converter.IntegerStringConverter;
 
 import java.io.IOException;
 
+//TODO: change next button check based on if you're adding an event or not.
+
 public class StatsInput {
 
     public static final int SPINNER_MIN = 0;
     public static final int SPINNER_MAX = 59;
 
-    private boolean addingEvent;
+    private boolean amAddingEvent;
+    private RewardEvent rewardEvent;
 
     @FXML
     private TextField repTextField;
@@ -54,9 +58,10 @@ public class StatsInput {
     private   Button confirmButton;
 
 
-    public void initializeData(boolean addingEvent){
-        this.addingEvent = addingEvent;
-        if(!addingEvent){
+    public void initializeData(RewardEvent rewardEvent, boolean amAddingEvent){
+        this.amAddingEvent = amAddingEvent;
+        this.rewardEvent = rewardEvent;
+        if(!amAddingEvent){
             repTextField.setEditable(false);
             creaturesOTextField.setEditable(false);
             creaturesYTextField.setEditable(false);
@@ -90,10 +95,27 @@ public class StatsInput {
 
     public void onBackButtonClick(ActionEvent actionEvent) throws IOException {
         //TODO: (UD3) send back Cards selected from previous page and refill it on that page. Maybe another initializeData()?
+        /* old
         Parent cardInput = FXMLLoader.load(InitialView.class.getResource("card-reward-input.fxml"));
         Scene cardInputScene = new Scene(cardInput);
         Stage window = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
         window.setScene(cardInputScene);
+        window.show();
+         */
+
+
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(InitialView.class.getResource("card-reward-input.fxml"));
+        Parent cardInputParent = loader.load();
+
+        CardRewardInput cardRewardInput = loader.getController();
+        cardRewardInput.initializeData(rewardEvent,amAddingEvent);
+
+        //Parent cardInput = FXMLLoader.load(InitialView.class.getResource("card-reward-input.fxml"));
+        Scene cardRewardScene = new Scene(cardInputParent); //was cardInput
+        Stage window = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
+        window.setScene(cardRewardScene);
         window.show();
     }
 
@@ -133,7 +155,7 @@ public class StatsInput {
             Parent confirmParent = loader.load();
 
             ConfirmPage confirmPage = loader.getController();
-            confirmPage.initializeData(addingEvent);
+            confirmPage.initializeData(amAddingEvent);
 
             Scene confirmScene = new Scene(confirmParent);
             Stage window = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();

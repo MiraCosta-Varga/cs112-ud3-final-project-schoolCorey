@@ -1,6 +1,7 @@
 package cs112.ud3.controllers;
 
 import cs112.ud3.Exceptions.OpponentNotValidException;
+import cs112.ud3.Exceptions.UninitializedLinkException;
 import cs112.ud3.InitialView;
 import cs112.ud3.models.DMOpponent;
 import cs112.ud3.models.OpponentLink;
@@ -21,7 +22,7 @@ public class OpponentInput {
 
     public static final int NOT_FOUND = -1;
 
-    RewardEvent event;
+    RewardEvent rewardEvent;
     boolean amAddingEvent;
 
     //Setup GUI components
@@ -53,7 +54,7 @@ public class OpponentInput {
         }
 
         //auto-select RewardEvent Info
-        this.event = event;
+        this.rewardEvent = event;
         DMOpponent origin = event.getOrigin();
         if(origin!=null){
             //Set location
@@ -107,8 +108,6 @@ public class OpponentInput {
     }
 
     public void onNextClick(ActionEvent event) throws IOException{
-        System.out.println("Next Clicked");
-        System.out.println(amAddingEvent);
 
         if(amAddingEvent){
             OpponentLink link = new OpponentLink();
@@ -117,6 +116,7 @@ public class OpponentInput {
                 String name = nameComboBox.getSelectionModel().getSelectedItem();
                 String location = locationComboBox.getSelectionModel().getSelectedItem();
                 DMOpponent opponent = link.linkOpponent(name,location);
+                rewardEvent.setOrigin(opponent);
 
 
                 //Go to next scene
@@ -125,7 +125,7 @@ public class OpponentInput {
                 Parent rewardInputParent = loader.load();
 
                 CardRewardInput cardRewardInput = loader.getController();
-                cardRewardInput.initializeData();
+                cardRewardInput.initializeData(rewardEvent,amAddingEvent);
 
                 //Parent cardInput = FXMLLoader.load(InitialView.class.getResource("card-reward-input.fxml"));
                 Scene cardRewardScene = new Scene(rewardInputParent); //was cardInput
@@ -135,6 +135,8 @@ public class OpponentInput {
             }catch (OpponentNotValidException onve){
                 //TODO: Make this a popup
                 System.out.println(onve.getMessage());
+            }catch (UninitializedLinkException ule){
+                System.err.println(ule.getMessage());
             }
 
 
@@ -144,7 +146,7 @@ public class OpponentInput {
             Parent rewardInputParent = loader.load();
 
             CardRewardInput cardRewardInput = loader.getController();
-            cardRewardInput.initializeData();
+            cardRewardInput.initializeData(rewardEvent,amAddingEvent);
 
 
             //Parent cardInput = FXMLLoader.load(InitialView.class.getResource("card-reward-input.fxml"));

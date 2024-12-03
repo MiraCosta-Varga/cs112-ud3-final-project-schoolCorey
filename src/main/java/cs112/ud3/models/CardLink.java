@@ -149,7 +149,12 @@ public class CardLink extends ValidLink {
     }
 
     private boolean cardIsValid(DMCard candidate){
-        return candidate.getHasShieldTrigger();
+        for(int i = 0; i < validCards.length; i++){
+            if (validCards[i].equals(candidate)){
+                return true;
+            }
+        }
+        return false;
     }
 
 
