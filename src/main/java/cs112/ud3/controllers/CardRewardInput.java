@@ -333,14 +333,14 @@ public class CardRewardInput {
 
     @FXML
     void  onNextClick(ActionEvent actionEvent) throws  IOException{
-        //TODO: (UD3) Make sure all cards are selected before continuing
+
         if(amAddingEvent){
             try {
                 //try adding cards to event
                 CardLink link = new CardLink();
                 for(int i = 0; i <CARDS_PER_EVENT; i++ ){
                     if(!link.objectIsValid(selectedCards[i])){
-                        throw new CardNotValidException();
+                        throw new CardNotValidException(i+1);
                     }
                     rewardEvent.addDrop(selectedCards[i],i);
                 }
@@ -363,8 +363,21 @@ public class CardRewardInput {
             }catch (UninitializedLinkException ule){
                 System.err.println(ule.getMessage());
             }catch (CardNotValidException cnve){
-                //Todo: make popup
-                System.out.println(cnve.getMessage());
+
+                Stage thisStage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
+
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(InitialView.class.getResource("error-popup.fxml"));
+                Parent cancelParent = loader.load();
+
+                ErrorPopup errorPopup = loader.getController();
+                errorPopup.initializeData(cnve.getMessage());
+
+                Stage stage = new Stage();
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.setScene(new Scene(cancelParent));
+                stage.setResizable(false);
+                stage.show();
             }
         }else {
             FXMLLoader loader = new FXMLLoader();
@@ -381,12 +394,6 @@ public class CardRewardInput {
             window.show();
         }
 
-
-
-
     }
-
-
-
 
 }

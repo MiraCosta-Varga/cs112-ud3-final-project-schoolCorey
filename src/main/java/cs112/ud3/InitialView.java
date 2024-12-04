@@ -19,7 +19,6 @@ public class InitialView extends Application {
         OpponentLink opponentLink = new OpponentLink();
         opponentLink.createValidArray();
 
-
         //Original initial view stuff
         FXMLLoader fxmlLoader = new FXMLLoader(InitialView.class.getResource("initial-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 320, 320);

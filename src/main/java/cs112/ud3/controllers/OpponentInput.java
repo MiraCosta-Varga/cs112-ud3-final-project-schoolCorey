@@ -14,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -107,7 +108,7 @@ public class OpponentInput {
         stage.close();
     }
 
-    public void onNextClick(ActionEvent event) throws IOException{
+    public void onNextClick(ActionEvent actionEvent) throws IOException{
 
         if(amAddingEvent){
             OpponentLink link = new OpponentLink();
@@ -129,12 +130,25 @@ public class OpponentInput {
 
                 //Parent cardInput = FXMLLoader.load(InitialView.class.getResource("card-reward-input.fxml"));
                 Scene cardRewardScene = new Scene(rewardInputParent); //was cardInput
-                Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+                Stage window = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
                 window.setScene(cardRewardScene);
                 window.show();
             }catch (OpponentNotValidException onve){
-                //TODO: Make this a popup
-                System.out.println(onve.getMessage());
+
+                Stage thisStage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
+
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(InitialView.class.getResource("error-popup.fxml"));
+                Parent cancelParent = loader.load();
+
+                ErrorPopup errorPopup = loader.getController();
+                errorPopup.initializeData(onve.getMessage());
+
+                Stage stage = new Stage();
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.setScene(new Scene(cancelParent));
+                stage.setResizable(false);
+                stage.show();
             }catch (UninitializedLinkException ule){
                 System.err.println(ule.getMessage());
             }
@@ -151,7 +165,7 @@ public class OpponentInput {
 
             //Parent cardInput = FXMLLoader.load(InitialView.class.getResource("card-reward-input.fxml"));
             Scene cardRewardScene = new Scene(rewardInputParent); //was cardInput
-            Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            Stage window = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
             window.setScene(cardRewardScene);
             window.show();
         }
