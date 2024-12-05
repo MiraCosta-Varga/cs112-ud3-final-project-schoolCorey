@@ -1,6 +1,7 @@
 package cs112.ud3.controllers;
 
 import cs112.ud3.InitialView;
+import cs112.ud3.UtilityBelt;
 import cs112.ud3.models.DMBattleStats;
 import cs112.ud3.models.RewardEvent;
 import javafx.event.ActionEvent;
@@ -20,7 +21,7 @@ import java.io.IOException;
 
 //TODO: change next button check based on if you're adding an event or not.
 
-public class StatsInput {
+public class StatsInput extends InputScreen{
 
     public static final int SPINNER_MIN = 0;
     public static final int SPINNER_MAX = 59;
@@ -57,7 +58,7 @@ public class StatsInput {
     @FXML
     private   Button confirmButton;
 
-
+    @Override
     public void initializeData(RewardEvent rewardEvent, boolean amAddingEvent){
         this.amAddingEvent = amAddingEvent;
         this.rewardEvent = rewardEvent;
@@ -77,9 +78,8 @@ public class StatsInput {
             backButton.setVisible(false);
 
         }
-        //I hope StackOverflow knows what the hell they're doing
 
-        //Start by making all the text fields accept integers only
+        //Make all the text fields accept integers only
         repTextField.setTextFormatter(new TextFormatter<>(new IntegerStringConverter()));
         creaturesOTextField.setTextFormatter(new TextFormatter<>(new IntegerStringConverter()));
         creaturesYTextField.setTextFormatter(new TextFormatter<>(new IntegerStringConverter()));
@@ -91,49 +91,33 @@ public class StatsInput {
         tWinsYTextField.setTextFormatter(new TextFormatter<>(new IntegerStringConverter()));
         minuteTextField.setTextFormatter(new TextFormatter<>(new IntegerStringConverter()));
         secondTextField.setTextFormatter(new TextFormatter<>(new IntegerStringConverter()));
+
+        //Fill in fields with this RewardEvent
+        DMBattleStats stats = rewardEvent.getRewardMods();
+        if(stats!=null){
+            repTextField.setText(Integer.toString(rewardEvent.getCurrency()));
+            creaturesOTextField.setText(Integer.toString(stats.getCreaturesLostOpp()));
+            creaturesYTextField.setText(Integer.toString(stats.getCreaturesLostPlayer()));
+            shieldsOTextField.setText(Integer.toString(stats.getShieldsLostOpp()));
+            shieldsYTextField.setText(Integer.toString(stats.getShieldsLostPlayer()));
+            mWinsOTextField.setText(Integer.toString(stats.getPlayerLossesLocal()));
+            mWinsYTextField.setText(Integer.toString(stats.getPlayerWinsLocal()));
+            tWinsOTextField.setText(Integer.toString(stats.getPlayerLossesTotal()));
+            tWinsYTextField.setText(Integer.toString(stats.getPlayerWinsTotal()));
+            minuteTextField.setText(Integer.toString(stats.getShieldsLostPlayer()));
+            shieldsYTextField.setText(Integer.toString(stats.getShieldsLostPlayer()));
+            minuteTextField.setText(Integer.toString(stats.getDuelTimeMinutes()));
+            secondTextField.setText(Integer.toString(stats.getDuelTimeSeconds()));
+
+        }
     }
 
     public void onBackButtonClick(ActionEvent actionEvent) throws IOException {
-        //TODO: (UD3) send back Cards selected from previous page and refill it on that page. Maybe another initializeData()?
-        /* old
-        Parent cardInput = FXMLLoader.load(InitialView.class.getResource("card-reward-input.fxml"));
-        Scene cardInputScene = new Scene(cardInput);
-        Stage window = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
-        window.setScene(cardInputScene);
-        window.show();
-         */
-
-
-
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(InitialView.class.getResource("card-reward-input.fxml"));
-        Parent cardInputParent = loader.load();
-
-        CardRewardInput cardRewardInput = loader.getController();
-        cardRewardInput.initializeData(rewardEvent,amAddingEvent);
-
-        //Parent cardInput = FXMLLoader.load(InitialView.class.getResource("card-reward-input.fxml"));
-        Scene cardRewardScene = new Scene(cardInputParent); //was cardInput
-        Stage window = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
-        window.setScene(cardRewardScene);
-        window.show();
+        UtilityBelt.changeInputScene("card-reward-input.fxml",rewardEvent,amAddingEvent,actionEvent);
     }
 
     public void onCancelClick(ActionEvent actionEvent) throws IOException{
-        Stage thisStage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
-
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(InitialView.class.getResource("cancel-confirmation.fxml"));
-        Parent cancelParent = loader.load();
-
-        CancelConfirmation cancelConfirmation = loader.getController();
-        cancelConfirmation.initializeData(thisStage);
-
-        Stage stage = new Stage();
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setScene(new Scene(cancelParent));
-        stage.setResizable(false);
-        stage.show();
+        UtilityBelt.createCancelPopup(actionEvent);
     }
 
     public void onNextClick(ActionEvent actionEvent) throws IOException{
@@ -149,24 +133,15 @@ public class StatsInput {
             int minutes = Integer.parseInt(minuteTextField.getText());
             int seconds = Integer.parseInt(secondTextField.getText());
             DMBattleStats stats = new DMBattleStats(creaturesLostPlayer,creaturesLostOpp,shieldsLostPlayer,shieldsLostOpp,playerWinsLocal,playerLossesLocal,playerWinsTotal,playerLossesTotal,minutes,seconds);
+            rewardEvent.setRewardMods(stats);
+            rewardEvent.setCurrency(Integer.parseInt(repTextField.getText()));
+            UtilityBelt.changeInputScene("confirm-page.fxml",rewardEvent,amAddingEvent,actionEvent);
 
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(InitialView.class.getResource("confirm-page.fxml"));
-            Parent confirmParent = loader.load();
-
-            ConfirmPage confirmPage = loader.getController();
-            confirmPage.initializeData(amAddingEvent);
-
-            Scene confirmScene = new Scene(confirmParent);
-            Stage window = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
-            window.setScene(confirmScene);
-            window.show();
         }catch (NumberFormatException nfe){
-            //TODO: make popup with message for error
-            System.out.println("Most likely one or more fields missing");
+            UtilityBelt.createErrorPopup("Invalid stats.\nMost likely one or more fields were empty.");
+
         }catch (IllegalArgumentException iae){
-            //TODO: make popup
-            System.out.println(iae.getMessage());
+            UtilityBelt.createErrorPopup("Invalid stats.\nMost likely a negative number was entered.");
         }
 
     }

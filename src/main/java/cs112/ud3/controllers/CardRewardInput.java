@@ -3,6 +3,7 @@ package cs112.ud3.controllers;
 import cs112.ud3.Exceptions.CardNotValidException;
 import cs112.ud3.Exceptions.UninitializedLinkException;
 import cs112.ud3.InitialView;
+import cs112.ud3.UtilityBelt;
 import cs112.ud3.models.CardLink;
 import cs112.ud3.models.DMCard;
 import cs112.ud3.models.DMCreature;
@@ -27,7 +28,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class CardRewardInput {
+public class CardRewardInput extends InputScreen{
     /***CONSTANTS***/
     public static final int CARD_1_INDEX = 0;
     public static final int CARD_2_INDEX = 1;
@@ -68,6 +69,7 @@ public class CardRewardInput {
      * @param rewardEvent The current event that is being tracked in this window.
      * @param amAddingEvent true if the user is currently adding an event, false if they are viewing an event.
      */
+    @Override
     public void initializeData(RewardEvent rewardEvent, boolean amAddingEvent){
 
         this.rewardEvent = rewardEvent;
@@ -294,41 +296,14 @@ public class CardRewardInput {
 
     /*** SCENE CHANGE BUTTONS ***/
 
-
     @FXML
-    void onBackClick(ActionEvent actionEvent) throws IOException {
-        //Back button will NOT update reward event with current card selections.
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(InitialView.class.getResource("opponent-input.fxml"));
-        Parent opponentInputParent = loader.load();
-
-        OpponentInput opponentInput = loader.getController();
-        opponentInput.initializeData(rewardEvent,amAddingEvent);
-
-
-        //Parent cardInput = FXMLLoader.load(InitialView.class.getResource("card-reward-input.fxml"));
-        Scene cardRewardScene = new Scene(opponentInputParent); //was cardInput
-        Stage window = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
-        window.setScene(cardRewardScene);
-        window.show();
+    public void onBackClick(ActionEvent actionEvent) throws IOException {
+        UtilityBelt.changeInputScene("opponent-input.fxml",rewardEvent,amAddingEvent,actionEvent);
     }
 
     @FXML
-    void onCancelClick(ActionEvent actionEvent) throws IOException{
-        Stage thisStage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
-
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(InitialView.class.getResource("cancel-confirmation.fxml"));
-        Parent cancelParent = loader.load();
-
-        CancelConfirmation cancelConfirmation = loader.getController();
-        cancelConfirmation.initializeData(thisStage);
-
-        Stage stage = new Stage();
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setScene(new Scene(cancelParent));
-        stage.setResizable(false);
-        stage.show();
+    public void onCancelClick(ActionEvent actionEvent) throws IOException{
+        UtilityBelt.createCancelPopup(actionEvent);
     }
 
     @FXML
@@ -345,55 +320,16 @@ public class CardRewardInput {
                     rewardEvent.addDrop(selectedCards[i],i);
                 }
 
-                //Move to next scene
-                FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(InitialView.class.getResource("stats-input.fxml"));
-                Parent statsParent = loader.load();
-
-                StatsInput statsInput = loader.getController();
-                statsInput.initializeData(rewardEvent ,amAddingEvent);
-
-                Scene opponentInputScene = new Scene(statsParent);
-                // initializeData() goes here
-                Stage window = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
-                window.setScene(opponentInputScene);
-                window.show();
-
+                UtilityBelt.changeInputScene("stats-input.fxml",rewardEvent,amAddingEvent,actionEvent);
 
             }catch (UninitializedLinkException ule){
                 System.err.println(ule.getMessage());
             }catch (CardNotValidException cnve){
-
-                Stage thisStage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
-
-                FXMLLoader loader = new FXMLLoader();
-                loader.setLocation(InitialView.class.getResource("error-popup.fxml"));
-                Parent cancelParent = loader.load();
-
-                ErrorPopup errorPopup = loader.getController();
-                errorPopup.initializeData(cnve.getMessage());
-
-                Stage stage = new Stage();
-                stage.initModality(Modality.APPLICATION_MODAL);
-                stage.setScene(new Scene(cancelParent));
-                stage.setResizable(false);
-                stage.show();
+                UtilityBelt.createErrorPopup(cnve.getMessage());
             }
         }else {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(InitialView.class.getResource("stats-input.fxml"));
-            Parent statsParent = loader.load();
-
-            StatsInput statsInput = loader.getController();
-            statsInput.initializeData(rewardEvent ,amAddingEvent);
-
-            Scene opponentInputScene = new Scene(statsParent);
-            // initializeData() goes here
-            Stage window = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
-            window.setScene(opponentInputScene);
-            window.show();
+            UtilityBelt.changeInputScene("stats-input.fxml",rewardEvent,amAddingEvent,actionEvent);
         }
-
     }
 
 }

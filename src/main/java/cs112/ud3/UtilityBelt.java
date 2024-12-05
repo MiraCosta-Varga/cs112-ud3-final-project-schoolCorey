@@ -1,7 +1,20 @@
 package cs112.ud3;
 
+import cs112.ud3.controllers.CancelConfirmation;
+import cs112.ud3.controllers.ConfirmPage;
+import cs112.ud3.controllers.ErrorPopup;
+import cs112.ud3.controllers.InputScreen;
 import cs112.ud3.models.DMCard;
 import cs112.ud3.models.DMCreature;
+import cs112.ud3.models.RewardEvent;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import java.io.IOException;
 
 /**
  * Utility Belt class holds helper methods for various other classes to use
@@ -154,6 +167,70 @@ public class UtilityBelt {
         }else{
             return -1;
         }
+    }
+
+    /**
+     * Creates a simple popup scene from the error-popup.fxml file that displays
+     * an error message to the user and can be closed with a single input to return
+     * to the previous scene
+     * @param message The message the popup should show to the user. Should inform them
+     *                of the issue which caused the error. Can be an Exception's message.
+     * @throws IOException required to use FXMLLoader's .load()
+     */
+    public static void createErrorPopup(String message) throws IOException {
+        System.out.println("Most likely one or more fields missing");
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(InitialView.class.getResource("error-popup.fxml"));
+        Parent cancelParent = loader.load();
+
+        ErrorPopup errorPopup = loader.getController();
+        errorPopup.initializeData(message);
+
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setScene(new Scene(cancelParent));
+        stage.setResizable(false);
+        stage.show();
+    }
+
+    /**
+     * Changes the scene to an InputScreen scene and sets it up with necessary info from the current RewardEvent, etc
+     * to be properly displayed and intractable
+     * @param sceneFXMLfilename the filename of the .fxml file of the scene to change to
+     * @param rewardEvent the current RewardEvent which is being tracked/modified
+     * @param amAddingEvent true if the player is adding(and thus modifying) a Reward Event, false if they are only viewing
+     * @param triggerEvent the ActionEvent which triggers the scene change. Used to get the stage window.
+     * @throws IOException required for FXMLLoader's .load() method.
+     */
+    public static void changeInputScene(String sceneFXMLfilename, RewardEvent rewardEvent, boolean amAddingEvent, ActionEvent triggerEvent) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(InitialView.class.getResource(sceneFXMLfilename));
+        Parent sceneParent = loader.load();
+
+        InputScreen nextScreen = loader.getController();
+        nextScreen.initializeData(rewardEvent,amAddingEvent);
+
+        Scene nextScene = new Scene(sceneParent);
+        Stage window = (Stage) ((Node)triggerEvent.getSource()).getScene().getWindow();
+        window.setScene(nextScene);
+        window.show();
+    }
+
+    public static void createCancelPopup(ActionEvent triggerEvent) throws  IOException{
+        Stage thisStage = (Stage) ((Node)triggerEvent.getSource()).getScene().getWindow();
+
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(InitialView.class.getResource("cancel-confirmation.fxml"));
+        Parent cancelParent = loader.load();
+
+        CancelConfirmation cancelConfirmation = loader.getController();
+        cancelConfirmation.initializeData(thisStage);
+
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setScene(new Scene(cancelParent));
+        stage.setResizable(false);
+        stage.show();
     }
 
 

@@ -1,6 +1,8 @@
 package cs112.ud3.controllers;
 
 import cs112.ud3.InitialView;
+import cs112.ud3.UtilityBelt;
+import cs112.ud3.models.DMCard;
 import cs112.ud3.models.RewardEvent;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,17 +12,26 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class ConfirmPage {
-    boolean addingEvent;
+public class ConfirmPage extends InputScreen{
+    public static final int CARD_1_INDEX = 0;
+    public static final int CARD_2_INDEX = 1;
+    public static final int CARD_3_INDEX = 2;
+
+    private boolean amAddingEvent;
+    private RewardEvent rewardEvent;
+
 
     //setup GUi
     @FXML
     private Label repPointsLabel;
+    @FXML
+    private Label opponentLabel;
     @FXML
     private ImageView card1Image;
     @FXML
@@ -32,14 +43,45 @@ public class ConfirmPage {
     @FXML
     private Button homeButton;
 
-    public void initializeData(boolean addingEvent){
-        this.addingEvent = addingEvent;
+    @Override
+    public void initializeData(RewardEvent rewardEvent, boolean addingEvent){
+
+        this.amAddingEvent = addingEvent;
+        this.rewardEvent = rewardEvent;
         if(!addingEvent){
             homeButton.setText("Return to Home");
             duelStatsButton.setText("See Event stats");
         }
+        repPointsLabel.setText(Integer.toString(rewardEvent.getCurrency()));
+        opponentLabel.setText(rewardEvent.getOrigin().toString());
+        DMCard[] rewards = rewardEvent.getItemDrops();
+        //TODO: add images
+        for(int i = 0; i < rewards.length; i++){
+            ImageView currentImage;
+            switch (i){
+                case CARD_1_INDEX:
+                    currentImage = card1Image;
+                    break;
+                case CARD_2_INDEX:
+                    currentImage = card2Image;
+                    break;
+                case CARD_3_INDEX:
+                    currentImage = card3Image;
+                    break;
+                default:
+                    currentImage = null;
+            }
+            DMCard currentCard = rewards[i];
+            int idNum = currentCard.getIdNum();
+            String selection = Integer.toString(idNum);
+            if(idNum>-1) {
+                String filepath = "/cs112/ud3/cardImages/" + selection + ".png";
+                Image newImage = new Image(getClass().getResourceAsStream(filepath));
+                currentImage.setImage(newImage);
 
-        //stub for now
+            }
+        }
+
     }
 
     public void onHomeClick(ActionEvent actionEvent){
@@ -48,18 +90,6 @@ public class ConfirmPage {
     }
 
     public void onDuelStatsClick(ActionEvent actionEvent) throws IOException {
-        //TODO: (UD3) Save selections and send them back
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(InitialView.class.getResource("stats-input.fxml"));
-        Parent statsParent = loader.load();
-
-        StatsInput statsInput = loader.getController();
-        //TODO: unstub this
-        statsInput.initializeData(new RewardEvent(),addingEvent);
-
-        Scene opponentInputScene = new Scene(statsParent);
-        Stage window = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
-        window.setScene(opponentInputScene);
-        window.show();
+        UtilityBelt.changeInputScene("stats-input.fxml",rewardEvent,amAddingEvent,actionEvent);
     }
 }

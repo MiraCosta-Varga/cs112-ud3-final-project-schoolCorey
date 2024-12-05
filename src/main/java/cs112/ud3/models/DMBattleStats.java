@@ -188,7 +188,7 @@ public class DMBattleStats {
      * @return true if parameter valid and duelTime was set; false if invalid and thus not set
      */
     public boolean setDuelTime(int minutes,int seconds) {
-        if(minutes<0||seconds<0){
+        if(minutes<0||seconds<0||seconds>60){
             return false;
         }else {
             int totalSeconds = (minutes*60) + seconds;
@@ -237,6 +237,50 @@ public class DMBattleStats {
                 setPlayerWinsLocal(playerWinsLocal) && setPlayerLossesLocal(playerLossesLocal) &&
                 setPlayerWinsTotal(playerWinsTotal) && setPlayerLossesTotal(playerLossesTotal) &&
                 setDuelTime(duelTime);
+    }
+
+    public int getCreaturesLostPlayer() {
+        return creaturesLostPlayer;
+    }
+
+    public int getCreaturesLostOpp() {
+        return creaturesLostOpp;
+    }
+
+    public int getShieldsLostPlayer() {
+        return shieldsLostPlayer;
+    }
+
+    public int getShieldsLostOpp() {
+        return shieldsLostOpp;
+    }
+
+    public int getPlayerWinsLocal() {
+        return playerWinsLocal;
+    }
+
+    public int getPlayerLossesLocal() {
+        return playerLossesLocal;
+    }
+
+    public int getPlayerWinsTotal() {
+        return playerWinsTotal;
+    }
+
+    public int getPlayerLossesTotal() {
+        return playerLossesTotal;
+    }
+
+    public int getDuelTime() {
+        return duelTime;
+    }
+
+    public int getDuelTimeMinutes(){
+        return duelTime/60;
+    }
+
+    public int getDuelTimeSeconds(){
+        return duelTime%60;
     }
 
     @Override

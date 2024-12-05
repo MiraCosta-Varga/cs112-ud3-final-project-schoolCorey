@@ -15,19 +15,19 @@ public class CancelConfirmation {
     //variables from others
     Stage lastStage; // to close that window and this one
 
-    void initializeData(Stage lastStage){
+    public void initializeData(Stage lastStage){
         this.lastStage = lastStage;
     }
 
     @FXML
-    void onYesClick(ActionEvent actionEvent){
+    public void onYesClick(ActionEvent actionEvent){
         lastStage.close();
         Stage stage = (Stage) yesButton.getScene().getWindow();
         stage.close();
     }
 
     @FXML
-    void onNoClick(ActionEvent actionEvent){
+    public void onNoClick(ActionEvent actionEvent){
         Stage stage = (Stage) noButton.getScene().getWindow();
         stage.close();
     }

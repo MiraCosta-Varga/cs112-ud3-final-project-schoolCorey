@@ -10,16 +10,30 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: beige;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs112.ud3.controllers.ConfirmPage">
+<AnchorPane prefHeight="415.0" prefWidth="610.0" style="-fx-background-color: beige;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cs112.ud3.controllers.ConfirmPage">
    <children>
       <VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0">
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" text="Confirm Selections">
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="69.0" prefWidth="210.0" text="Confirm Selections">
                <font>
                   <Font name="Century Schoolbook" size="24.0" />
                </font>
             </Label>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="40.0">
+            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="600.0" spacing="40.0">
+               <children>
+                  <Label text="Opponent:">
+                     <font>
+                        <Font name="Century Schoolbook" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="opponentLabel" text="Sean (Park)">
+                     <font>
+                        <Font name="Century Schoolbook" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="72.0" prefWidth="600.0" spacing="40.0">
                <children>
                   <Label text="Reputation Points: ">
                      <font>
