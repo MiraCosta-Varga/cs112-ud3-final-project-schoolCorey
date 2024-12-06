@@ -1,11 +1,13 @@
 package cs112.ud3.models;
 
+import java.io.Serializable;
+
 /**
  * Class to represent the information shown on the Duel Stats screen for a given reward event.
  * Includes player and opponent stats for creatures/shields lost, player win/loss agains this opponent,
  * player total win/loss, and duel time.
  */
-public class DMBattleStats {
+public class DMBattleStats implements Serializable {
     private static final int DEFAULT_STAT_VALUE = 0; //shared by all stats as the same default
 
     private int creaturesLostPlayer;
@@ -287,11 +289,11 @@ public class DMBattleStats {
     public String toString(){
         String result = "Duel Stats:\n";
         result+= "Creatures Lost:\n";
-        result+= String.format("Player: %d%tOpponent: %d%n",creaturesLostPlayer,creaturesLostOpp);
+        result+= String.format("Player: %d\tOpponent: %d%n",creaturesLostPlayer,creaturesLostOpp);
         result+= "Shields Lost:\n";
-        result += String.format("Player: %d%tOpponent: %d%n",shieldsLostPlayer,shieldsLostOpp);
+        result += String.format("Player: %d\tOpponent: %d%n",shieldsLostPlayer,shieldsLostOpp);
         result+= "Matchup Wins:\n";
-        result += String.format("Player: %d%tOpponent: %d%n",playerWinsLocal,playerLossesLocal);
+        result += String.format("Player: %d\tOpponent: %d%n",playerWinsLocal,playerLossesLocal);
         result += String.format("Total Player wins: %d%nTotal Player Losses: %d%n",playerWinsTotal,playerLossesTotal);
         int minutes = duelTime/60;
         int seconds = duelTime%60;

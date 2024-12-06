@@ -2,18 +2,13 @@ package cs112.ud3.controllers;
 
 import cs112.ud3.Exceptions.CardNotValidException;
 import cs112.ud3.Exceptions.UninitializedLinkException;
-import cs112.ud3.InitialView;
 import cs112.ud3.UtilityBelt;
 import cs112.ud3.models.CardLink;
 import cs112.ud3.models.DMCard;
-import cs112.ud3.models.DMCreature;
 import cs112.ud3.models.RewardEvent;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
@@ -23,8 +18,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -325,7 +318,7 @@ public class CardRewardInput extends InputScreen{
             }catch (UninitializedLinkException ule){
                 System.err.println(ule.getMessage());
             }catch (CardNotValidException cnve){
-                UtilityBelt.createErrorPopup(cnve.getMessage());
+                UtilityBelt.createMessagePopup(cnve.getMessage());
             }
         }else {
             UtilityBelt.changeInputScene("stats-input.fxml",rewardEvent,amAddingEvent,actionEvent);

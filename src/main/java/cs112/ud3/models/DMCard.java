@@ -1,10 +1,12 @@
 package cs112.ud3.models;
 
+import java.io.Serializable;
+
 /**
  * Represents a card available in the video game version of Duel Masters. Should only be created/modified by CardLink and tester classes,
  * but can be accessed by other classes to read its data.  
  */
-public class DMCard {
+public class DMCard implements Serializable {
     /*CONSTANTS*/
     public static final int RARITY_NONE = -1;
     public static final int RARITY_COMMON = 0;

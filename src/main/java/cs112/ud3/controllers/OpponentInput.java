@@ -2,20 +2,14 @@ package cs112.ud3.controllers;
 
 import cs112.ud3.Exceptions.OpponentNotValidException;
 import cs112.ud3.Exceptions.UninitializedLinkException;
-import cs112.ud3.InitialView;
 import cs112.ud3.UtilityBelt;
 import cs112.ud3.models.DMOpponent;
 import cs112.ud3.models.OpponentLink;
 import cs112.ud3.models.RewardEvent;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -125,7 +119,7 @@ public class OpponentInput extends InputScreen{
                 UtilityBelt.changeInputScene("card-reward-input.fxml",rewardEvent,amAddingEvent,actionEvent);
 
             }catch (OpponentNotValidException onve){
-                UtilityBelt.createErrorPopup(onve.getMessage());
+                UtilityBelt.createMessagePopup(onve.getMessage());
             }catch (UninitializedLinkException ule){
                 System.err.println(ule.getMessage());
             }

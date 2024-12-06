@@ -1,7 +1,6 @@
 package cs112.ud3;
 
 import cs112.ud3.controllers.CancelConfirmation;
-import cs112.ud3.controllers.ConfirmPage;
 import cs112.ud3.controllers.ErrorPopup;
 import cs112.ud3.controllers.InputScreen;
 import cs112.ud3.models.DMCard;
@@ -171,14 +170,13 @@ public class UtilityBelt {
 
     /**
      * Creates a simple popup scene from the error-popup.fxml file that displays
-     * an error message to the user and can be closed with a single input to return
-     * to the previous scene
+     * a message to the user and can be closed with a single input to return
+     * to the previous scene. Can be used to inform of errors or successful addition of events
      * @param message The message the popup should show to the user. Should inform them
      *                of the issue which caused the error. Can be an Exception's message.
      * @throws IOException required to use FXMLLoader's .load()
      */
-    public static void createErrorPopup(String message) throws IOException {
-        System.out.println("Most likely one or more fields missing");
+    public static void createMessagePopup(String message) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(InitialView.class.getResource("error-popup.fxml"));
         Parent cancelParent = loader.load();

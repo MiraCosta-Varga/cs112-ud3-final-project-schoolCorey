@@ -1,20 +1,13 @@
 package cs112.ud3.controllers;
 
-import cs112.ud3.InitialView;
 import cs112.ud3.UtilityBelt;
 import cs112.ud3.models.DMBattleStats;
 import cs112.ud3.models.RewardEvent;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
 
 import java.io.IOException;
@@ -138,10 +131,10 @@ public class StatsInput extends InputScreen{
             UtilityBelt.changeInputScene("confirm-page.fxml",rewardEvent,amAddingEvent,actionEvent);
 
         }catch (NumberFormatException nfe){
-            UtilityBelt.createErrorPopup("Invalid stats.\nMost likely one or more fields were empty.");
+            UtilityBelt.createMessagePopup("Invalid stats.\nMost likely one or more fields were empty.");
 
         }catch (IllegalArgumentException iae){
-            UtilityBelt.createErrorPopup("Invalid stats.\nMost likely a negative number was entered.");
+            UtilityBelt.createMessagePopup("Invalid stats.\nMost likely a negative number was entered.");
         }
 
     }

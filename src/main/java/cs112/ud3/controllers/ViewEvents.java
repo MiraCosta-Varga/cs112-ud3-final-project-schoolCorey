@@ -1,6 +1,7 @@
 package cs112.ud3.controllers;
 
 import cs112.ud3.InitialView;
+import cs112.ud3.UtilityBelt;
 import cs112.ud3.models.RewardEvent;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,18 +14,25 @@ import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class ViewEvents {
 
+    private ArrayList<RewardEvent> database;
+
     @FXML
-    private ComboBox eventChoiceComboBox; //TODO: (UD3)Make it a combo box of reward events
+    private ComboBox<RewardEvent> eventChoiceComboBox;
     @FXML
     private Button backButton;
     @FXML
     private Button nextButton;
 
-    public void initializeData(){
+    public void initializeData(ArrayList<RewardEvent> database){
         //stub
+        this.database = database;
+        for(RewardEvent event: database){
+            eventChoiceComboBox.getItems().add(event);
+        }
     }
 
     public void onBackClick(ActionEvent actionEvent){
@@ -33,17 +41,14 @@ public class ViewEvents {
     }
 
     public void onNextClick(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(InitialView.class.getResource("confirm-page.fxml"));
-        Parent confirmParent = loader.load();
+        RewardEvent selection = eventChoiceComboBox.getSelectionModel().getSelectedItem();
 
-        ConfirmPage confirmPage = loader.getController();
-        confirmPage.initializeData(new RewardEvent(), false);
+        if (selection!= null){
+            UtilityBelt.changeInputScene("confirm-page.fxml",selection,false,actionEvent);
+        }else {
+            UtilityBelt.createMessagePopup("No event chosen.\nPlease make a selection.");
+        }
 
-        Scene confirmScene = new Scene(confirmParent);
-        Stage window = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
-        window.setScene(confirmScene);
-        window.show();
     }
 
 

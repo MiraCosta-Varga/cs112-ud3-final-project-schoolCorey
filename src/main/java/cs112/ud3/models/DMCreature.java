@@ -1,6 +1,8 @@
 package cs112.ud3.models;
 
-public class DMCreature extends DMCard {
+import java.io.Serializable;
+
+public class DMCreature extends DMCard implements Serializable {
     /***CONSTANTS***/
 
     public static final int RACE_GHOST = 0;

@@ -1,5 +1,11 @@
 package cs112.ud3.models;
 
+import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+
 /**
  * Class for an event that gives the player a reward. For the Duel Masters PS2 game that this program is intended for,
  * a Reward Event would be a duel. It gives the player currency in the form of reputation points, itemDrops in the form
@@ -7,7 +13,7 @@ package cs112.ud3.models;
  * the amount of reputation points or the card drop rates are effected by the stats of the duel,
  * which are recorded in rewardMods.
  */
-public class RewardEvent {
+public class RewardEvent implements Serializable {
     public static final String NOT_FOUND = "NOT FOUND";
     public static final int MAX_REWARDS_PER_EVENT = 3;
     public static final int DEFAULT_CURRENCY = 0;
@@ -16,6 +22,7 @@ public class RewardEvent {
     private DMCard[] itemDrops = new DMCard[MAX_REWARDS_PER_EVENT];
     private DMBattleStats rewardMods;
     private DMOpponent origin;
+    private LocalDateTime timeCreated;
 
     /***CONSTRUCTORS**/
     /**
@@ -130,6 +137,32 @@ public class RewardEvent {
     }
 
     /**
+     * Sets the time the event is created to the current date-time from the system clock in the default time-zone.
+     *
+     * Should only be used when copying OR just before adding the event to the database;
+     * NOT at creation of the RewardEvent object as DMOpponent input which can be done in advance of the actual
+     * RewardEvent.
+     */
+    public void initializeTimeCreated(){
+        this.timeCreated = LocalDateTime.now();
+    }
+
+    /**
+     * Sets the time the event is created to the current date-time from the system clock in the default time-zone.
+     *
+     * Should only be used when copying OR just before adding the event to the database;
+     * NOT at creation of the RewardEvent object as DMOpponent input which can be done in advance of the actual
+     * RewardEvent.
+     */
+    public boolean setTimeCreated(LocalDateTime timeCreated){
+        if(timeCreated!=null){
+            this.timeCreated = timeCreated;
+            return true;
+        }else return false;
+
+    }
+
+    /**
      * Setter for instance variables except for itemDrops, which should have items added individually by addDrop()
      * @param currency the amount of currency (Reputation Points) gained from this event
      * @param rewardMods DMBattleStats object representing the stats of the duel, which may modify currency/card drop rates.
@@ -157,7 +190,20 @@ public class RewardEvent {
 
     }
 
+    /**
+     * Setter for all instance variables. Since it includes itemDrops, should only be called from copy constructor.
+     * @param currency the amount of currency (Reputation Points) gained from this event
+     * @param rewardMods DMBattleStats object representing the stats of the duel, which may modify currency/card drop rates.
+     * @param origin the DMOpponent that was fought during this event.
+     * @param itemDrops itemDrops the DMCard array to copy into this RewardEvent. null is valid, and will cause this
+     *                  object's itemDrops array to become null.
+     * @return true if all params were valid and thus set; false if one or more were invalid and not set
+     */
+    public boolean setAll(int currency, DMBattleStats rewardMods, DMOpponent origin, DMCard[]itemDrops,LocalDateTime timeCreated){
+        this.setItemDrops(itemDrops);
+        return this.setAll(currency,rewardMods,origin) && this.setTimeCreated(timeCreated);
 
+    }
 
     /***ACCESSORS***/
 
@@ -193,9 +239,17 @@ public class RewardEvent {
         return origin;
     }
 
+    /**
+     * Getter of timeCreated LocalDateTime instance var
+     * @return The time at which the RewardEvent was added to the database, as a LocalDateTime object.
+     */
+    public LocalDateTime getTimeCreated() {
+        return timeCreated;
+    }
+
     /***OVERRIDES**/
-    @Override
-    public String toString(){
+
+    public String toStringExtended(){
         String result = "Opponent:\n";
         if(origin!=null){
             result += origin.toString() + "\n";
@@ -220,6 +274,14 @@ public class RewardEvent {
             result += NOT_FOUND +"\n";
         }
 
+        return result;
+    }
+
+    @Override
+    public String toString(){
+        String result = "";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm:ss a");
+        result+= timeCreated.format(formatter);
         return result;
     }
 

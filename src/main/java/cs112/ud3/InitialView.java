@@ -13,7 +13,6 @@ import java.io.IOException;
 public class InitialView extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        //TODO:(UD3) Create Database (Array list from file) here
         CardLink cardLink = new CardLink();
         cardLink.createValidArray();
         OpponentLink opponentLink = new OpponentLink();
