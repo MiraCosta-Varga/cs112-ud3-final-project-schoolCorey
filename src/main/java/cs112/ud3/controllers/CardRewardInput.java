@@ -1,4 +1,9 @@
 package cs112.ud3.controllers;
+/**
+ * Uses combo boxes of DMCards with editable TextFields to allow the user to input
+ * the cards gained as rewards. Includes (somewhat scuffed) autocomplete functionality
+ * and uses card images as visual feedback so the user can tell they chose the right card.
+ */
 
 import cs112.ud3.Exceptions.CardNotValidException;
 import cs112.ud3.Exceptions.UninitializedLinkException;
@@ -143,6 +148,14 @@ public class CardRewardInput extends InputScreen{
     }
 
     //ok, so I guess enter is consumed on the action event or something?
+
+    /**
+     * Checks if the key was pressed while a ComboBox was focused, and if it was,
+     * automatically selects a card which matches the currently inputted text.
+     * If enter was pressed, automatically fills in the rest of the name of the
+     * matching card in the box's TextField.
+     * @param keyEvent the keyEvent that triggers the method.
+     */
     @FXML
     public void keyPressed(KeyEvent keyEvent){
         ComboBox<DMCard> currentBox = null;
@@ -289,40 +302,67 @@ public class CardRewardInput extends InputScreen{
 
     /*** SCENE CHANGE BUTTONS ***/
 
+    /**
+     * Sends the user to the previous scene, and also sends the information of the current RewardEvent
+     * and whether or not the user is adding an event to the new scene
+     * @param actionEvent the event (clicking the back button) which causes the trigger
+     * @throws IOException required by FXMLLoader .load() in UtilityBelt.changeInputScene
+     */
     @FXML
     public void onBackClick(ActionEvent actionEvent) throws IOException {
-        UtilityBelt.changeInputScene("opponent-input.fxml",rewardEvent,amAddingEvent,actionEvent);
+        if (actionEvent.getSource()==backButton){
+            UtilityBelt.changeInputScene("opponent-input.fxml",rewardEvent,amAddingEvent,actionEvent);
+        }
+
     }
 
+    /**
+     * Creates a popup that lets the user cancel adding the event entirely, closing the windows and
+     * discarding changes to RewardEvents, and returning to the original stage.
+     * @param actionEvent the event (clicking the back button) which causes the trigger
+     * @throws IOException required by FXMLLoader .load() in UtilityBelt.changeInputScene
+     */
     @FXML
     public void onCancelClick(ActionEvent actionEvent) throws IOException{
-        UtilityBelt.createCancelPopup(actionEvent);
+        if(actionEvent.getSource()==cancelButton){
+            UtilityBelt.createCancelPopup(actionEvent);
+        }
+
     }
 
+    /**
+     * Sends the user to the next scene, and also sends the information of the current RewardEvent
+     * and whether or not the user is adding an event to the new scene
+     * @param actionEvent the event (clicking the back button) which causes the trigger
+     * @throws IOException required by FXMLLoader .load() in UtilityBelt.changeInputScene
+     */
     @FXML
     void  onNextClick(ActionEvent actionEvent) throws  IOException{
-
-        if(amAddingEvent){
-            try {
-                //try adding cards to event
-                CardLink link = new CardLink();
-                for(int i = 0; i <CARDS_PER_EVENT; i++ ){
-                    if(!link.objectIsValid(selectedCards[i])){
-                        throw new CardNotValidException(i+1);
+        if (actionEvent.getSource()==nextButton){
+            if(amAddingEvent){
+                try {
+                    //try adding cards to event
+                    CardLink link = new CardLink();
+                    for(int i = 0; i <CARDS_PER_EVENT; i++ ){
+                        if(!link.objectIsValid(selectedCards[i])){
+                            throw new CardNotValidException(i+1);
+                        }
+                        rewardEvent.addDrop(selectedCards[i],i);
                     }
-                    rewardEvent.addDrop(selectedCards[i],i);
+
+                    UtilityBelt.changeInputScene("stats-input.fxml",rewardEvent,amAddingEvent,actionEvent);
+
+                }catch (UninitializedLinkException ule){
+                    System.err.println(ule.getMessage());
+                }catch (CardNotValidException cnve){
+                    UtilityBelt.createMessagePopup(cnve.getMessage());
                 }
-
+            }else {
                 UtilityBelt.changeInputScene("stats-input.fxml",rewardEvent,amAddingEvent,actionEvent);
-
-            }catch (UninitializedLinkException ule){
-                System.err.println(ule.getMessage());
-            }catch (CardNotValidException cnve){
-                UtilityBelt.createMessagePopup(cnve.getMessage());
             }
-        }else {
-            UtilityBelt.changeInputScene("stats-input.fxml",rewardEvent,amAddingEvent,actionEvent);
         }
+
+
     }
 
 }

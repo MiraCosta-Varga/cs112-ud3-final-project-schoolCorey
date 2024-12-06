@@ -1,4 +1,12 @@
 package cs112.ud3.controllers;
+/**
+ * Allows the user to input information about the DMOpponent which is the origin of the RewardEvent.
+ * They can input the current opponent via comboboxes for their name and location.
+ * Will give the user an error popup if the name and location do not match a valid combination when they try to move on.
+ * If it is valid, then moving to the next stage will create a DMOpponent with the current location, set it to the current
+ * RewardEvent's origin, and pass the current RewardEvent to the next scene.
+ * The user can also click a back button to close the stage, returning to the initial view.
+ */
 
 import cs112.ud3.Exceptions.OpponentNotValidException;
 import cs112.ud3.Exceptions.UninitializedLinkException;
@@ -96,38 +104,50 @@ public class OpponentInput extends InputScreen{
     }
 
 
-
-
-
+    /**
+     * Sends the user back to the initial view and discards all changes to the current RewardEvent
+     * by closing the current stage.
+     * @param event the event (back button action) causing the method to be fired.
+     */
     @FXML
     public void onBackClick(ActionEvent event){
-        Stage stage = (Stage) backButton.getScene().getWindow();
-        stage.close();
+        if(event.getSource()==backButton){
+            Stage stage = (Stage) backButton.getScene().getWindow();
+            stage.close();
+        }
     }
 
+    /**
+     * Creates a DMOpponent with the currently input name and location, and checks if such an opponent is valid.
+     * If it is not, creates a popup informing the user of the error. If it is, then the opponent is added to the
+     * current RewardEvent, and the RewardEvent, along with the information that the user is adding an event, is passed
+     * to the next scene (CardRewardInput), which the stage then moves to.
+     * @param actionEvent the event (next button action) causing the method to be fired.
+     * @throws IOException from FXML.load() in UtilityBelt.changeInputScene()
+     */
     public void onNextClick(ActionEvent actionEvent) throws IOException{
 
-        if(amAddingEvent){
-            OpponentLink link = new OpponentLink();
-            try{
-                //Check if opponent is valid
-                String name = nameComboBox.getSelectionModel().getSelectedItem();
-                String location = locationComboBox.getSelectionModel().getSelectedItem();
-                DMOpponent opponent = link.linkOpponent(name,location);
-                rewardEvent.setOrigin(opponent);
+        if(actionEvent.getSource()==nextButton){
+            if(amAddingEvent){
+                OpponentLink link = new OpponentLink();
+                try{
+                    //Check if opponent is valid
+                    String name = nameComboBox.getSelectionModel().getSelectedItem();
+                    String location = locationComboBox.getSelectionModel().getSelectedItem();
+                    DMOpponent opponent = link.linkOpponent(name,location);
+                    rewardEvent.setOrigin(opponent);
 
+                    UtilityBelt.changeInputScene("card-reward-input.fxml",rewardEvent,amAddingEvent,actionEvent);
+
+                }catch (OpponentNotValidException onve){
+                    UtilityBelt.createMessagePopup(onve.getMessage());
+                }catch (UninitializedLinkException ule){
+                    System.err.println(ule.getMessage());
+                }
+
+            }else{
                 UtilityBelt.changeInputScene("card-reward-input.fxml",rewardEvent,amAddingEvent,actionEvent);
-
-            }catch (OpponentNotValidException onve){
-                UtilityBelt.createMessagePopup(onve.getMessage());
-            }catch (UninitializedLinkException ule){
-                System.err.println(ule.getMessage());
             }
-
-        }else{
-            UtilityBelt.changeInputScene("card-reward-input.fxml",rewardEvent,amAddingEvent,actionEvent);
         }
-
-
     }
 }

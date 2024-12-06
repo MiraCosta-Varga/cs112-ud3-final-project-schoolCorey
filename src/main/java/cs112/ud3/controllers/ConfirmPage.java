@@ -1,4 +1,11 @@
 package cs112.ud3.controllers;
+/**
+ * Shows the user the Opponent, Rep points, and card rewards of the current reward event.
+ * If the user is adding an event, allows them to add the event to the database.
+ * Button labels change based on whether the user is adding an event or viewing them,
+ * to make it more clear what the function of the results would be.
+ * The buttons still lead to the same scenes either way.
+ */
 
 import cs112.ud3.NoHeaderObjectOutputStream;
 import cs112.ud3.UtilityBelt;
@@ -57,7 +64,6 @@ public class ConfirmPage extends InputScreen{
         repPointsLabel.setText(Integer.toString(rewardEvent.getCurrency()));
         opponentLabel.setText(rewardEvent.getOrigin().toString());
         DMCard[] rewards = rewardEvent.getItemDrops();
-        //TODO: add images
         for(int i = 0; i < rewards.length; i++){
             ImageView currentImage;
             Label currentLabel;
@@ -92,39 +98,64 @@ public class ConfirmPage extends InputScreen{
 
     }
 
+    /**
+     * Finishes the viewing/creation of this RewardEvent.
+     * If the user is adding an event,
+     * it first sets the last instance var of the RewardEvent, timeCreated. It then
+     * looks for the eventDatabase.dat file, creating it if it is missing.
+     * It uses ObjectOutputStream to append the current RewardEvent to the file,
+     * and then creates a popup informing the user of the successful addition of the event.
+     *
+     * The method then closes the stage, returning the user to the initial view.
+     * @param actionEvent the actionEvent which caused the method to be fired
+     * @throws IOException needed for FXML.load(), thrown if there are issues with our .fxml files
+     */
     public void onHomeClick(ActionEvent actionEvent)throws IOException{
-        //save RewardEvent to database if adding event
-        if(amAddingEvent){
-            try{
-                //set reward event time here before saving
-                rewardEvent.initializeTimeCreated();
-                File eventDatabase = new File("src/main/resources/cs112/ud3/eventDatabase.dat");
-                if(eventDatabase.createNewFile()){
-                    System.out.println("database file created.");
+        if (actionEvent.getSource()==homeButton){
+
+
+            //save RewardEvent to database if adding event
+            if(amAddingEvent){
+                try{
+                    //set reward event time here before saving
+                    rewardEvent.initializeTimeCreated();
+                    File eventDatabase = new File("src/main/resources/cs112/ud3/eventDatabase.dat");
+                    if(eventDatabase.createNewFile()){
+                        System.out.println("database file created.");
+                    }
+                    //New stuff that hopefully works
+                    if(eventDatabase.length() == 0){
+                        ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(eventDatabase,true));
+                        outputStream.writeObject(rewardEvent);
+                        outputStream.close();
+                    }else {
+                        NoHeaderObjectOutputStream outputStream = new NoHeaderObjectOutputStream(new FileOutputStream(eventDatabase,true));
+                        outputStream.writeObject(rewardEvent);
+                        outputStream.close();
+                    }
+                    UtilityBelt.createMessagePopup("Event Added!");
+                }catch (IOException ioe){
+                    System.out.println("Failed to open binary file.");
                 }
-                //New stuff that hopefully works
-                if(eventDatabase.length() == 0){
-                    ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(eventDatabase,true));
-                    outputStream.writeObject(rewardEvent);
-                    outputStream.close();
-                }else {
-                    NoHeaderObjectOutputStream outputStream = new NoHeaderObjectOutputStream(new FileOutputStream(eventDatabase,true));
-                    outputStream.writeObject(rewardEvent);
-                    outputStream.close();
-                }
-                UtilityBelt.createMessagePopup("Event Added!");
-            }catch (IOException ioe){
-                System.out.println("Failed to open binary file.");
+
             }
 
+            Stage stage = (Stage) homeButton.getScene().getWindow();
+            stage.close();
         }
 
-
-        Stage stage = (Stage) homeButton.getScene().getWindow();
-        stage.close();
     }
 
+    /**
+     * Sends the user to the Stats input screen, passing on information about the
+     * current RewardEvent and whether the user is adding or viewing an event.
+     * @param actionEvent the event (duelStatsButton action) causing the method to be fired.
+     * @throws IOException needed for FXML.load(), thrown if there are issues with our .fxml files
+     */
     public void onDuelStatsClick(ActionEvent actionEvent) throws IOException {
-        UtilityBelt.changeInputScene("stats-input.fxml",rewardEvent,amAddingEvent,actionEvent);
+        if(actionEvent.getSource()==duelStatsButton){
+            UtilityBelt.changeInputScene("stats-input.fxml",rewardEvent,amAddingEvent,actionEvent);
+        }
+
     }
 }

@@ -1,4 +1,15 @@
 package cs112.ud3.controllers;
+/**
+ * Lets the user input information from the Duel Stats screen, as well as the Reputation Points earned,
+ * from the current RewardEvent. Fields only take Integer input, and min/sec duel time fields are limited to
+ * 0-59 inclusive.
+ * User can hit back to return to the CardInputScreen, discarding changes to StatsInput but keeping the previous
+ * CardRewardInput and OpponentInput information
+ * User can hit next to create a DMBattleStats object and add it and the Reputation Points to the RewardEvent,
+ * and send its info on to the confirmation screen.
+ * If the user is not adding an event, the fields for all inputs will be filled in with the info of the
+ * current RewardEvent, but are unable to be edited, and the next button does not modify the reward event either.
+ */
 
 import cs112.ud3.UtilityBelt;
 import cs112.ud3.models.DMBattleStats;
@@ -105,14 +116,35 @@ public class StatsInput extends InputScreen{
         }
     }
 
+    /**
+     * Sends the user back to the CardRewardInput screen. Changes on this scene will be discarded, but
+     * previous changes to CardRewardInput or OpponentInput will be kept and recreated upon returning
+     * to thsose screens.
+     * @param actionEvent the event (back button action) causing the method to be fired.
+     * @throws IOException from FXML.load() in UtilityBelt.changeInputScene()
+     */
     public void onBackButtonClick(ActionEvent actionEvent) throws IOException {
         UtilityBelt.changeInputScene("card-reward-input.fxml",rewardEvent,amAddingEvent,actionEvent);
     }
 
+    /**
+     * Creates a popup which allows the user to entirely cancel adding the event, discarding all changes and
+     * closing the popup's window and this one
+
+     */
     public void onCancelClick(ActionEvent actionEvent) throws IOException{
         UtilityBelt.createCancelPopup(actionEvent);
     }
 
+    /**
+     * Verifies that all fields have valid input, and creates an error popup for the
+     * user if they do not. If they do, then creates a DMBattleStats object with the info, adds
+     * it and the reputationPoints(currency) to the RewardEvent, sends the RewardEvent info
+     * and whether the user is adding an event or not to the next scene (ConfirmPage),
+     * and sends the user to that scene.
+     * @param actionEvent the event (cancel button action) causing the method to be fired.
+     * @throws IOException from FXML.load() in UtilityBelt.changeInputScene()
+     */
     public void onNextClick(ActionEvent actionEvent) throws IOException{
         try{
             int creaturesLostPlayer = Integer.parseInt(creaturesYTextField.getText());
