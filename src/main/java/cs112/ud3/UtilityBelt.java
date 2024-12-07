@@ -214,6 +214,13 @@ public class UtilityBelt {
         window.show();
     }
 
+    /**
+     * Creates a popup of a CancelConfirmation scene, and gives it the stage of the previous window
+     * so that it has the ability to close both itself and the previous window.
+     * @param triggerEvent the event which is creating the cancel popup (usually a cancel button click, needed to
+     *                     get the window of the previous stage)
+     * @throws IOException for FXMLLoader.load()
+     */
     public static void createCancelPopup(ActionEvent triggerEvent) throws  IOException{
         Stage thisStage = (Stage) ((Node)triggerEvent.getSource()).getScene().getWindow();
 

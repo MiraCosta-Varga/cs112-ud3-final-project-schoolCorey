@@ -1,4 +1,9 @@
 package cs112.ud3;
+/**
+ * The screen the application starts at. Controller is HelloController
+ * Also calls the createValidArray() methods of ValidLink classes at the
+ * earliest possible opportunity in the program.
+ */
 
 import cs112.ud3.models.CardLink;
 import cs112.ud3.models.OpponentLink;
