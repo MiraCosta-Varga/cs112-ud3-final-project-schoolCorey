@@ -11,10 +11,6 @@ import java.util.Scanner;
  * Class to hold an array of all valid DM cards
  * When the user wants to add a card, they go through linkObject() from this class
  * to ensure that they are adding a valid Duel Masters Card
- * /
- /*
- * * linking ALGORITHM:
- * * Figure out however the bleep combo box works
  */
 
 public class CardLink extends ValidLink {
@@ -97,6 +93,22 @@ public class CardLink extends ValidLink {
 
     }
 
+    /**
+     * Takes a string of input which is the block of text for a specific creature card found in a text file
+     * of card information, and creates a DMCreature with that information.
+     * @param cardBlock the block of text to create the DMCreature from. Should be formatted
+     *                  like in this example:
+     *
+     *                  Name: Bloody Squito
+     *                  Civilization: Darkness
+     *                  Race: Brain Jacker
+     *                  Abilities: Blocker, Can't Attack, Gets Destroyed after battling
+     *                  Mana Cost: 2
+     *                  Power: 4000
+     *                  Rarity: Common
+     *                  Ways to Acquire: Starter Deck
+     * @return a DMCreature with the specified name, civilization, race, textbox (abilities), cost, power, and rarity.
+     */
     public DMCreature creatureCreateFromStringArray(String cardBlock){
         int cardType = DMCard.CARDTYPE_CREATURE;
         String[] keyVals;
@@ -118,6 +130,19 @@ public class CardLink extends ValidLink {
         return thisCard;
     }
 
+    /**
+     * Takes a string of input which is the block of text for a specific spell card found in a text file
+     * of card information, and creates a DMCard with that information.
+     * @param cardBlock the block of text to create the DMCreature from. Should be formatted
+     *                  like in this example:
+     *
+     *                  Spell: Lost Soul
+     *                  Civilization: Darkness
+     *                  Abilities: opponent discards all cards
+     *                  Mana Cost: 7
+     *                  Rarity: Uncommon
+     * @return a DMCard with the specified name, civilization, race, textbox (abilities), cost, and rarity.
+     */
     public DMCard spellCreateFromStringArray(String cardBlock){
         int cardType = DMCard.CARDTYPE_SPELL;
         String[] keyVals;
@@ -148,6 +173,13 @@ public class CardLink extends ValidLink {
         }
     }
 
+    /**
+     * ObjectIsValid method, specifically for DMCard canditates. Checks if a given card
+     * is valid by checking if it matches a card in the validCards array.
+     * @param candidate the DMCard to check for validity of. Whether the object is a DMCard should be checked in
+     *                  the objectIsValid() method that this method is called from
+     * @return true if the card is found in the array and thus valid, false if it is not found in the array and is invalid.
+     */
     private boolean cardIsValid(DMCard candidate){
         for(int i = 0; i < validCards.length; i++){
             if (validCards[i].equals(candidate)){

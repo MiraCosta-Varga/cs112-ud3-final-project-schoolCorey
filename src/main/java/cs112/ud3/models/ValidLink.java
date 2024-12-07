@@ -1,4 +1,9 @@
 package cs112.ud3.models;
+/**
+ * Abstract class for classes which help to determine valid versions of objects.
+ * This is done by creating an array of valid versions of objects, and checking
+ * an object agains that array in an objectIsValid() method.
+ */
 
 import cs112.ud3.Exceptions.UninitializedLinkException;
 

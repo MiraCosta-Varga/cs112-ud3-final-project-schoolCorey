@@ -241,46 +241,94 @@ public class DMBattleStats implements Serializable {
                 setDuelTime(duelTime);
     }
 
+    /**
+     * Getter for the creaturesLostPlayer instance variable
+     * @return int for the number of creatures the player lost during the duel that caused the reward event
+     */
     public int getCreaturesLostPlayer() {
         return creaturesLostPlayer;
     }
 
+    /**
+     * Getter for the creaturesLostOpp instance variable
+     * @return the number of creatures the opponent lost during the duel that caused the reward event
+     */
     public int getCreaturesLostOpp() {
         return creaturesLostOpp;
     }
 
+    /**
+     * Getter for the shieldsLostPlayer instance variable
+     * @return the number of shields the player lost during the duel that cause the reward event
+     */
     public int getShieldsLostPlayer() {
         return shieldsLostPlayer;
     }
 
+    /**
+     * Getter for the shieldsLostOpp instance variable
+     * @return the number of shields the opponent lost during the duel that cause the reward event
+     */
     public int getShieldsLostOpp() {
         return shieldsLostOpp;
     }
 
+    /**
+     * Getter for the playerWinsLocal instance variable
+     * @return int for the number of times the player has won against this specific opponent
+     *         at the point of this reward event
+     */
     public int getPlayerWinsLocal() {
         return playerWinsLocal;
     }
 
+    /**
+     * Getter for the playerLossesLocal instance variable
+     * @return int for the number of times the player has lost against this specific opponent
+     *         at the point of this reward event
+     */
     public int getPlayerLossesLocal() {
         return playerLossesLocal;
     }
 
+    /**
+     * Getter for the playerWinsTotal instance variable
+     * @return int for the number of times the player has won overall
+     *         at the point of this reward event
+     */
     public int getPlayerWinsTotal() {
         return playerWinsTotal;
     }
 
+    /**
+     * Getter for the playerLossesTotal instance variable
+     * @return int for the number of times the player has lost overall
+     *         at the point of this reward event
+     */
     public int getPlayerLossesTotal() {
         return playerLossesTotal;
     }
 
+    /**
+     * Getter for duelTime instance variable
+     * @return int for the time the duel took in total seconds
+     */
     public int getDuelTime() {
         return duelTime;
     }
 
+    /**
+     * Getter for number of minutes the duel took
+     * @return int for number of minutes the duel took (minutes portion of mm:ss format)
+     */
     public int getDuelTimeMinutes(){
         return duelTime/60;
     }
 
+    /**
+     * Getter for seconds portion of duel time in Minutes:Seconds format
+     * @return int for number of seconds for mm:ss format the duel took
+     */
     public int getDuelTimeSeconds(){
         return duelTime%60;
     }

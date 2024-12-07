@@ -1,4 +1,9 @@
 package cs112.ud3.models;
+/**
+ * Represents specifically a Creature card available in the video game version of Duel Masters.
+ * Should only be created/modified by CardLink and tester classes,
+ * but can be accessed by other classes to read its data.
+ */
 
 import java.io.Serializable;
 

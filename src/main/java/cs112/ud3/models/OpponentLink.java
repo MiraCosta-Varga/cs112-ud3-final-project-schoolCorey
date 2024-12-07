@@ -1,4 +1,11 @@
 package cs112.ud3.models;
+/**
+ * Class which holds an array of all valid DMOpponents which actually exist in-game
+ * Currently only tracks opponents that can be fought freely after clearing the story
+ * Can check if an opponent is valid by checking it against the knownOpponents array,
+ * or can use linkOpponent to attempt to create a valid DMOpponent through
+ * string inputs.
+ */
 
 import cs112.ud3.Exceptions.OpponentNotValidException;
 import cs112.ud3.Exceptions.UninitializedLinkException;

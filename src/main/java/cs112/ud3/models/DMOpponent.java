@@ -1,4 +1,10 @@
 package cs112.ud3.models;
+/**
+ * Represents an opponent fought in a duel in the PS2 Duel Masters video game,
+ * whose defeat caused a reward event.
+ * Includes their name and location.
+ * Use OpponentLink to ensure that valid DMOpponent objects that actually exist in-game are being created.
+ */
 
 import cs112.ud3.UtilityBelt;
 
