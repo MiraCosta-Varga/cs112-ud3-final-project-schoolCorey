@@ -7,8 +7,12 @@ package cs112.ud3.controllers;
  * the StatsInput Page, to see all of the event's info without being able to edit the event or re-add it to the database
  */
 
+import cs112.ud3.Exceptions.OpponentNotValidException;
 import cs112.ud3.InitialView;
 import cs112.ud3.UtilityBelt;
+import cs112.ud3.models.DMCard;
+import cs112.ud3.models.DMOpponent;
+import cs112.ud3.models.OpponentLink;
 import cs112.ud3.models.RewardEvent;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -28,7 +32,7 @@ public class ViewEvents {
     private ArrayList<RewardEvent> database;
 
     @FXML
-    private ComboBox<RewardEvent> eventChoiceComboBox;
+    private ComboBox<String> eventChoiceComboBox;
     @FXML
     private Button backButton;
     @FXML
@@ -43,8 +47,9 @@ public class ViewEvents {
         //stub
         this.database = database;
         for(RewardEvent event: database){
-            eventChoiceComboBox.getItems().add(event);
+            eventChoiceComboBox.getItems().add(event.toString());
         }
+        eventChoiceComboBox.getSelectionModel().selectLast();
     }
 
     /**
@@ -67,7 +72,7 @@ public class ViewEvents {
      */
     public void onNextClick(ActionEvent actionEvent) throws IOException {
         if (actionEvent.getSource()==nextButton){
-            RewardEvent selection = eventChoiceComboBox.getSelectionModel().getSelectedItem();
+            RewardEvent selection = database.get(eventChoiceComboBox.getSelectionModel().getSelectedIndex());
 
             if (selection!= null){
                 UtilityBelt.changeInputScene("confirm-page.fxml",selection,false,actionEvent);
@@ -77,6 +82,12 @@ public class ViewEvents {
         }
 
 
+    }
+
+    @FXML
+    public void debugComboBoxAction(ActionEvent actionEvent){
+
+        int mikon = 359;
     }
 
 

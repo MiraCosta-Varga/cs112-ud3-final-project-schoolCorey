@@ -39,14 +39,15 @@ public class DMCard implements Serializable {
 
     /*Instance Variables */
 
-    private String name;
-    private int civilization;
-    private int cardType;
-    private String textbox;
-    private int rarity;
-    private int cost;
-    private boolean hasShieldTrigger;
-    int idNum;
+    //protected so the DMSpell can just use the DMCard code
+    protected String name;
+    protected int civilization;
+    protected int cardType;
+    protected String textbox;
+    protected int rarity;
+    protected int cost;
+    protected boolean hasShieldTrigger;
+    protected int idNum;
 
     /**** CONSTRUCTORS ****/
 

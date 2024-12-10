@@ -190,7 +190,7 @@ public class DMBattleStats implements Serializable {
      * @return true if parameter valid and duelTime was set; false if invalid and thus not set
      */
     public boolean setDuelTime(int minutes,int seconds) {
-        if(minutes<0||seconds<0||seconds>60){
+        if((minutes<0)||(seconds<0)||(seconds>60)){
             return false;
         }else {
             int totalSeconds = (minutes*60) + seconds;

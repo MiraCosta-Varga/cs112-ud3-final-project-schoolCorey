@@ -25,6 +25,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class CardRewardInput extends InputScreen{
     /***CONSTANTS***/
@@ -82,60 +83,63 @@ public class CardRewardInput extends InputScreen{
         }
 
         //copies card drops if they exist
-        DMCard[] drops = rewardEvent.getItemDrops();
+        int[] drops = rewardEvent.getItemDrops();
         if(drops!=null){
             for (int i = 0; i < drops.length; i++){
-                DMCard original = drops[i];
-                selectedCards[i] = original;
-                if(original!=null){
-                    int index;
-                    ComboBox<DMCard> currentBox = null;
-                    ImageView currentImage = null;
-                    switch (i){
-                        case CARD_1_INDEX:
-                            index = findCardInComboBox(cardRewardComboBox1,original);
-                            if (index!=-1){
-                                cardRewardComboBox1.getSelectionModel().select(index);
-                                currentBox = cardRewardComboBox1;
-                                currentImage = card1image;
-                            }
-                            break;
-                        case CARD_2_INDEX:
-                            index = findCardInComboBox(cardRewardComboBox2,original);
-                            if (index!=-1){
-                                cardRewardComboBox2.getSelectionModel().select(index);
-                                currentBox = cardRewardComboBox2;
-                                currentImage = card2image;
-                            }
-                            break;
-                        case CARD_3_INDEX:
-                            index = findCardInComboBox(cardRewardComboBox3,original);
-                            if (index!=-1){
-                                cardRewardComboBox3.getSelectionModel().select(index);
-                                currentBox = cardRewardComboBox3;
-                                currentImage = card3image;
-                            }
-                            break;
-                        default: break;
-                    }
-                    if(currentBox!=null){
-                        try{
-                            DMCard currentCard = currentBox.getSelectionModel().getSelectedItem();
-                            int idNum = currentCard.getIdNum();
-                            String selection = Integer.toString(idNum);
-                            if(idNum>-1){
-                                String filepath = "/cs112/ud3/cardImages/" +selection+".png";
-                                Image newImage = new Image(getClass().getResourceAsStream(filepath));
-                                currentImage.setImage(newImage);
-                            }
-                        }catch (ClassCastException cce){
-                            System.out.println("Misspelling");
-                        }catch (NullPointerException npe){
-                            System.out.println("Nullpo. Probably caused by a missing image file.");
+                int idNum = drops[i];
+                if (idNum!=RewardEvent.UNDEFINED_DMCARD){
+                    DMCard original = CardLink.linkCardFromID(drops[i]);
+                    selectedCards[i] = original;
+                    if(original!=null){
+                        int index;
+                        ComboBox<DMCard> currentBox = null;
+                        ImageView currentImage = null;
+                        switch (i){
+                            case CARD_1_INDEX:
+                                index = findCardInComboBox(cardRewardComboBox1,original);
+                                if (index!=-1){
+                                    cardRewardComboBox1.getSelectionModel().select(index);
+                                    currentBox = cardRewardComboBox1;
+                                    currentImage = card1image;
+                                }
+                                break;
+                            case CARD_2_INDEX:
+                                index = findCardInComboBox(cardRewardComboBox2,original);
+                                if (index!=-1){
+                                    cardRewardComboBox2.getSelectionModel().select(index);
+                                    currentBox = cardRewardComboBox2;
+                                    currentImage = card2image;
+                                }
+                                break;
+                            case CARD_3_INDEX:
+                                index = findCardInComboBox(cardRewardComboBox3,original);
+                                if (index!=-1){
+                                    cardRewardComboBox3.getSelectionModel().select(index);
+                                    currentBox = cardRewardComboBox3;
+                                    currentImage = card3image;
+                                }
+                                break;
+                            default: break;
                         }
-                    }
+                        if(currentBox!=null){
+                            try{
+                                DMCard currentCard = currentBox.getSelectionModel().getSelectedItem();
+                                String selection = Integer.toString(idNum);
+                                if(idNum>-1){
+                                    String filepath = "/cs112/ud3/cardImages/" +selection+".png";
+                                    Image newImage = new Image(getClass().getResourceAsStream(filepath));
+                                    currentImage.setImage(newImage);
+                                }
+                            }catch (ClassCastException cce){
+                                System.out.println("Misspelling");
+                            }catch (NullPointerException npe){
+                                System.out.println("Nullpo. Probably caused by a missing image file.");
+                            }
+                        }
 
+                    }
                 }
+
             }
         }
 

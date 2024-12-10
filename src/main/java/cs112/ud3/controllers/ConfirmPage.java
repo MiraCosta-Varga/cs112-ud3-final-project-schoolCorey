@@ -9,6 +9,7 @@ package cs112.ud3.controllers;
 
 import cs112.ud3.NoHeaderObjectOutputStream;
 import cs112.ud3.UtilityBelt;
+import cs112.ud3.models.CardLink;
 import cs112.ud3.models.DMCard;
 import cs112.ud3.models.RewardEvent;
 import javafx.event.ActionEvent;
@@ -20,6 +21,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.*;
+import java.util.ArrayList;
 
 public class ConfirmPage extends InputScreen{
     public static final int CARD_1_INDEX = 0;
@@ -63,7 +65,7 @@ public class ConfirmPage extends InputScreen{
         }
         repPointsLabel.setText(Integer.toString(rewardEvent.getCurrency()));
         opponentLabel.setText(rewardEvent.getOrigin().toString());
-        DMCard[] rewards = rewardEvent.getItemDrops();
+        int[] rewards = rewardEvent.getItemDrops();
         for(int i = 0; i < rewards.length; i++){
             ImageView currentImage;
             Label currentLabel;
@@ -84,7 +86,7 @@ public class ConfirmPage extends InputScreen{
                     currentImage = null;
                     currentLabel = null;
             }
-            DMCard currentCard = rewards[i];
+            DMCard currentCard = CardLink.linkCardFromID(rewards[i]);
             int idNum = currentCard.getIdNum();
             String selection = Integer.toString(idNum);
             if(idNum>-1) {
@@ -115,25 +117,31 @@ public class ConfirmPage extends InputScreen{
 
 
             //save RewardEvent to database if adding event
+            //hopefully the writeUnshared() fixes the issues I was having??
             if(amAddingEvent){
                 try{
                     //set reward event time here before saving
                     rewardEvent.initializeTimeCreated();
-                    File eventDatabase = new File("src/main/resources/cs112/ud3/eventDatabase.dat");
-                    if(eventDatabase.createNewFile()){
-                        System.out.println("database file created.");
-                    }
-                    //New stuff that hopefully works
-                    if(eventDatabase.length() == 0){
-                        ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(eventDatabase,true));
-                        outputStream.writeObject(rewardEvent);
-                        outputStream.close();
+                    if (rewardEvent.isValid()){
+                        File eventDatabase = new File("src/main/resources/cs112/ud3/eventDatabase.dat");
+                        if(eventDatabase.createNewFile()){
+                            System.out.println("database file created.");
+                        }
+                        //New stuff that hopefully works
+                        if(eventDatabase.length() == 0){
+                            ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(eventDatabase,true));
+                            outputStream.writeUnshared(rewardEvent);
+                            outputStream.close();
+                        }else {
+                            NoHeaderObjectOutputStream outputStream = new NoHeaderObjectOutputStream(new FileOutputStream(eventDatabase,true));
+                            outputStream.writeUnshared(rewardEvent);
+                            outputStream.close();
+                        }
+                        UtilityBelt.createMessagePopup("Event Added!");
                     }else {
-                        NoHeaderObjectOutputStream outputStream = new NoHeaderObjectOutputStream(new FileOutputStream(eventDatabase,true));
-                        outputStream.writeObject(rewardEvent);
-                        outputStream.close();
+                        UtilityBelt.createMessagePopup("Current reward event contains invalid data.");
                     }
-                    UtilityBelt.createMessagePopup("Event Added!");
+
                 }catch (IOException ioe){
                     System.out.println("Failed to open binary file.");
                 }

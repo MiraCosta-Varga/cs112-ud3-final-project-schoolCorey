@@ -1,10 +1,11 @@
 package cs112.ud3.models;
 
+import cs112.ud3.Exceptions.UninitializedLinkException;
+
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
+import java.util.ArrayList;
 
 /**
  * Class for an event that gives the player a reward. For the Duel Masters PS2 game that this program is intended for,
@@ -17,9 +18,14 @@ public class RewardEvent implements Serializable {
     public static final String NOT_FOUND = "NOT FOUND";
     public static final int MAX_REWARDS_PER_EVENT = 3;
     public static final int DEFAULT_CURRENCY = 0;
+    public static final int UNDEFINED_DMCARD = -1;
 
     private int currency;
-    private DMCard[] itemDrops = new DMCard[MAX_REWARDS_PER_EVENT];
+    //Trying changing this array to an ArrayList. If that doesn't work, we'll make it an int array of idNums
+    //private DMCard[] itemDrops = new DMCard[MAX_REWARDS_PER_EVENT];
+    //private DMCard[] itemDrops = new DMCard[MAX_REWARDS_PER_EVENT];
+    //private ArrayList<DMCard> itemDrops = new ArrayList<DMCard>(MAX_REWARDS_PER_EVENT);
+    private int[] itemDrops = {UNDEFINED_DMCARD,UNDEFINED_DMCARD,UNDEFINED_DMCARD};
     private DMBattleStats rewardMods;
     private DMOpponent origin;
     private LocalDateTime timeCreated;
@@ -30,6 +36,7 @@ public class RewardEvent implements Serializable {
      */
     public RewardEvent(){
         this(DEFAULT_CURRENCY,null,null);
+        int mikon = 359;
     }
 
     /**
@@ -87,11 +94,11 @@ public class RewardEvent implements Serializable {
      */
     public boolean addDrop(DMCard drop, int index) throws IllegalArgumentException{
         if (drop == null || index < 0 || index > (MAX_REWARDS_PER_EVENT -1)){
-            String message = String.format("Tried to add null reward or tried to add outside bounds of array.%nThere are %d rewards per event, so the index needs to be less than that.", MAX_REWARDS_PER_EVENT);
+            String message = String.format("Tried to add null reward or tried to add outside maximum bounds.%nThere are %d rewards per event, so the index needs to be less than that.", MAX_REWARDS_PER_EVENT);
             throw new IllegalArgumentException(message);
         }else {
-            boolean wasNotOverwritten = (itemDrops[index] == null);
-            itemDrops[index] = drop;
+            boolean wasNotOverwritten = (itemDrops[index] == UNDEFINED_DMCARD);
+            itemDrops[index] = drop.getIdNum();
             return wasNotOverwritten;
         }
     }
@@ -105,7 +112,7 @@ public class RewardEvent implements Serializable {
      *                  object's itemDrops array to become null.
      * @throws IllegalArgumentException if the param's size does not match the expected size of the itemDrops array.
      */
-    public void setItemDrops (DMCard[] itemDrops) throws IllegalArgumentException{
+    public void setItemDrops (int[] itemDrops) throws IllegalArgumentException{
         if(itemDrops==null){
             throw new IllegalArgumentException("attempted copy of itemDrops array is null");
         }else{
@@ -113,7 +120,7 @@ public class RewardEvent implements Serializable {
                 String message = String.format("Array to set does not match proper size. Should have %d items.",MAX_REWARDS_PER_EVENT);
                 throw new IllegalArgumentException(message);
             }else {
-                for(int i=0; i<itemDrops.length; i++){
+                for(int i = 0; i < itemDrops.length; i++){
                     this.itemDrops[i] = itemDrops[i];
                 }
             }
@@ -184,7 +191,7 @@ public class RewardEvent implements Serializable {
      *                  object's itemDrops array to become null.
      * @return true if all params were valid and thus set; false if one or more were invalid and not set
      */
-    public boolean setAll(int currency, DMBattleStats rewardMods, DMOpponent origin, DMCard[]itemDrops){
+    public boolean setAll(int currency, DMBattleStats rewardMods, DMOpponent origin, int[] itemDrops){
         this.setItemDrops(itemDrops);
         return this.setAll(currency,rewardMods,origin);
 
@@ -199,7 +206,7 @@ public class RewardEvent implements Serializable {
      *                  object's itemDrops array to become null.
      * @return true if all params were valid and thus set; false if one or more were invalid and not set
      */
-    public boolean setAll(int currency, DMBattleStats rewardMods, DMOpponent origin, DMCard[]itemDrops,LocalDateTime timeCreated){
+    public boolean setAll(int currency, DMBattleStats rewardMods, DMOpponent origin, int[] itemDrops,LocalDateTime timeCreated){
         this.setItemDrops(itemDrops);
         return this.setAll(currency,rewardMods,origin) && this.setTimeCreated(timeCreated);
 
@@ -219,7 +226,7 @@ public class RewardEvent implements Serializable {
      * Getter for itemDrops instance variable
      * @return and array of all DMCard rewards gained from this event.
      */
-    public DMCard[] getItemDrops() {
+    public int[] getItemDrops() {
         return itemDrops;
     }
 
@@ -259,9 +266,10 @@ public class RewardEvent implements Serializable {
 
         result += String.format("Reputation Points:%n%d%n",currency);
         result += "Card Rewards:\n";
-        for (DMCard drop : itemDrops){
-            if (drop!=null){
-                result+= drop.toString() + "\n";
+        for (int drop : itemDrops){
+            if (drop!=UNDEFINED_DMCARD){
+                ;
+                result+= CardLink.linkCardFromID(drop).toString() + "\n";
             }else {
                 result += "NOT FOUND\n";
             }
@@ -276,6 +284,44 @@ public class RewardEvent implements Serializable {
 
         return result;
     }
+    /****OTHER CUSTOM METHODS***/
+    /**
+     * Checks if the current RewardEvent object is in a valid completed state.
+     * Validity is checked in constructor of RewardEvent object, but because
+     * the object is modified over the course of the program, this method is used
+     * as a final check for validity before saving the RewardEvent to a file
+     * @return true if all instance variables have valid info, false if one or more fields are missing or invalid.
+     */
+    public boolean isValid()  {
+        boolean missingData = (itemDrops==null) || (rewardMods == null) || (origin == null) || (timeCreated == null);
+        if (missingData){return false;}
+        if (itemDrops.length != MAX_REWARDS_PER_EVENT){
+            return false;
+        }
+        ValidLink link = new CardLink();
+        for(int drop : itemDrops){
+            if(drop==UNDEFINED_DMCARD){
+                return false;
+            }
+            try {
+                if(!link.objectIsValid(CardLink.linkCardFromID(drop))){
+                    return false;
+                }
+            }catch (UninitializedLinkException ule){
+                System.out.println(ule.getMessage());
+                return false;
+            }
+        }
+        //nulls completed, now checking validity of primitives
+        if(currency<0){
+            return false;
+        }
+        return true; // all checks passed
+    }
+
+
+
+    /***OTHER REQUIRED METHODS***/
 
     @Override
     public String toString(){
@@ -297,4 +343,5 @@ public class RewardEvent implements Serializable {
                     otherEvent.origin.equals(this.origin);
         }
     }
+
 }

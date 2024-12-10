@@ -91,7 +91,9 @@ public class HelloController {
             }catch (FileNotFoundException fnfe){
                 UtilityBelt.createMessagePopup("File not yet created.\n please add events before trying to view.");
             }catch (IOException ioe){
+                ioe.printStackTrace(System.err);
                 UtilityBelt.createMessagePopup("Failed to open file.");
+
             }catch (ClassNotFoundException cnfe){
                 UtilityBelt.createMessagePopup("Tried to load object for unrecognized class");
             }

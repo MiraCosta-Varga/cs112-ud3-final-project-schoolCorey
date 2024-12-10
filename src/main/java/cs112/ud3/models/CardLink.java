@@ -157,7 +157,7 @@ public class CardLink extends ValidLink {
         String lowercaseAbility = ability.toLowerCase();
         boolean hasShieldTrigger = ability.contains("shield trigger");
 
-        DMCard thisCard = new DMCard(name,civ,cardType,ability,rarity,cost,hasShieldTrigger,currentCardID);
+        DMCard thisCard = new DMSpell(name,civ,cardType,ability,rarity,cost,hasShieldTrigger,currentCardID);
         return thisCard;
     }
 
@@ -187,6 +187,16 @@ public class CardLink extends ValidLink {
             }
         }
         return false;
+    }
+
+    /**
+     * Returns a Duel Masters card with the specified idnum
+     * The idnum is equal to the cardss position in the validCards array when it is created.
+     * @param id The id number of the card (its position in the validCards array when it is created)
+     * @return a DMCard object that matches the card of the specified idnum
+     */
+    public static DMCard linkCardFromID(int id){
+        return validCards[id];
     }
 
 
