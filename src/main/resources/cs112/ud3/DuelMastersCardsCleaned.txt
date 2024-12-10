@@ -1,0 +1,1152 @@
+Name: Belbetphlo, Wailing Shadow
+Civilization: Darkness
+Race: Ghost
+Abilities: Slayer
+Mana Cost: 3
+Power: 1000
+Rarity: Common
+Ways to Acquire: Starter Deck
+
+Name: Bloody Squito
+Civilization: Darkness
+Race: Brain Jacker
+Abilities: Blocker, Can't Attack, Gets Destroyed after battling
+Mana Cost: 2
+Power: 4000
+Rarity: Common
+Ways to Acquire: Starter Deck
+
+Name: Bone Assassin, the Ripper
+Civilization: Darkness
+Race: Living Dead
+Abilities: Slayer
+Mana Cost: 4
+Power: 2000
+Rarity: Common
+Ways to Acquire: Starter Deck
+
+Name: Bone Ghoul, Writhing
+Civilization: Darkness
+Race: Living Dead
+Abilities: none
+Mana Cost: 2
+Power: 2000
+Rarity:Common
+Ways to Acquire: Starter Deck
+
+Name: Bone Spider
+Civilization: Darkness
+Race: Living Dead
+Abilities: Gets Destroyed after battling
+Mana Cost: 3
+Power: 5000
+Rarity:Uncommon
+Ways to Acquire: Starter Deck
+
+Spell: Dark Reversal
+Civilization: Darkness
+Abilities: Shield Trigger, Return a creature from graveyard to your hand
+Mana Cost: 2
+Rarity: Uncommon
+
+Name: Dark Titan Maginn
+Civilization: Darkness
+Race: Demon Command
+Abilities: When this attacks, opponent discards 1
+Mana Cost: 6
+Power: 4000
+Rarity: Very Rare
+Ways to Acquire: 
+
+Spell: Death Smoke
+Civilization: Darkness
+Abilities: Destroy 1 untapped creature
+Mana Cost: 4
+Rarity: Common
+
+Name: Deathliger, Lion of Chaos
+Civilization: Darkness
+Race: Demon Command
+Abilities: Double Breaker
+Mana Cost: 7
+Power: 9000
+Rarity: Super Rare
+Ways to Acquire: Choose from Knight as signature card for Flynn
+
+Name: Gamil, Knight of Hatred
+Civilization: Darkness
+Race: Demon Command
+Abilities: On play, Return a Darkness creature from graveyard to hand
+Mana Cost: 6
+Power: 4000
+Rarity: Rare
+Ways to Acquire:
+
+Spell: Ghost Touch
+Civilization: Darkness
+Abilities: Shield Trigger, opponent discards 1
+Mana Cost: 2
+Rarity: Common
+
+Name: Gigagiele
+Civilization: Darkness
+Race: Chimera
+Abilities: Slayer
+Mana Cost: 5
+Power: 3000
+Rarity: Rare
+Ways to Acquire: Starter Deck
+
+Name: Giriel, Ghastly Warrior
+Civilization: Darkness
+Race: Demon Command
+Abilities: Double Breaker
+Mana Cost: 8
+Power: 11000
+Rarity: Super Rare
+Ways to Acquire: Choose as Signature card from Knight in Flynn's campaign
+
+Name: Gray Balloon, Shadow of Greed
+Civilization: Darkness
+Race: Ghost
+Abilities: Blocker, Can't Attack
+Mana Cost: 3
+Power: 3000
+Rarity: Uncommon
+Ways to Acquire: Starter Deck
+
+Name: Gregorian Worm
+Civilization: Darkness
+Race: Parasite Worm
+Abilities: Shield trigger
+Mana Cost: 4
+Power: 3000
+Rarity: Common
+Ways to Acquire: Starter Deck
+
+Name: Jack Viper, Shadow of Doom
+Civilization: Darkness
+Race: Ghost
+Abilities: Evolution, If another one of your darkness creatures would be destroyed, return it to your hand instead
+Mana Cost: 3
+Power: 4000
+Rarity: Very Rare
+Ways to Acquire:
+
+Name: Locomotiver
+Civilization: Darkness 
+Race: Hedrian
+Abilities: Shield trigger, Opponent discards 1
+Mana Cost: 4
+Power: 1000
+Rarity: Uncommon
+Ways to Acquire: Starter Deck
+
+Spell: Lost Soul
+Civilization: Darkness
+Abilities: opponent discards all cards
+Mana Cost: 7
+Rarity: Uncommon
+
+Name: Marrow Ooze, the Twister
+Civilization: Darkness
+Race: Living Dead
+Abilities: Blocker, Destroyed after attacking
+Mana Cost: 1
+Power: 1000
+Rarity: Common
+Ways to Acquire: Starter Deck
+
+Name: Phlael, Shadow of Betrayal
+Civilization: Darkness
+Race: Ghost
+Abilities: Slayer, returns to hand when destroyed
+Mana Cost: 4
+Power: 1000
+Rarity: Super Rare
+Ways to Acquire: 9 Piece creature card in Flynn's campaign
+
+Name: Photocide, Lord of the Wastes
+Civilization: Darkness
+Race: Demon Command
+Abilities: Can't Attack players, can attack untapped light creatures
+Mana Cost: 5
+Power: 9000
+Rarity: Rare
+Ways to Acquire: Starter Deck
+
+Name: Scratchclaw
+Civilization: Darkness
+Race: Hedrian
+Abilities: Slayer, +1000 power for your other dark creatures
+Mana Cost: 4
+Power: 1000
+Rarity: Rare
+Ways to Acquire: Starter Deck
+
+Name: Shadow Moon, Cursed Shade
+Civilization: Darkness
+Race: Ghost
+Abilities: +2000 power to other dark creatures
+Mana Cost: 4
+Power: 3000
+Rarity: Common
+Ways to Acquire: Starter Deck
+
+Name: Skeleton Soldier, the Defiled
+Civilization: Darkness
+Race: Living Dead
+Abilities: none
+Mana Cost: 4
+Power: 3000
+Rarity: Common
+Ways to Acquire: Starter Deck
+
+Spell: Snake Attack
+Civilization: Darkness
+Abilities: Double breaker for all for 1 turn, but lose 1 shield
+Mana Cost: 4
+Rarity: Common
+
+Spell: Terror Pit
+Civilization: Darkness
+Abilities: Shield Trigger, Destroy 1 creature
+Mana Cost: 6
+Rarity: Rare
+
+Name: Vampire Silphy
+Civilization: Darkness
+Race: Dark Lord
+Abilities: Destroy all creatures with power 3000 or less
+Mana Cost: 8
+Power: 4000
+Rarity: Very Rare
+Ways to Acquire:
+
+Name: Zagaan, Knight of Darkness
+Civilization: Darkness
+Race: Demon Command
+Abilities: Double Breaker
+Mana Cost: 6
+Power: 7000
+Rarity: Super Rare
+Ways to Acquire: Choose from Knight as signature card for Flynn
+
+Name: Astrocomet Dragon
+Civilization: Fire
+Race: Armored Dragon
+Abilities: Power Attacker +4000, Double Breaker
+Mana Cost: 7
+Power: 6000
+Rarity: Super Rare
+Ways to Acquire: Chose from Knight as signature creature for Rusty
+
+Name: Bad-Axe Norsykler
+Civilization: Fire
+Race: Human
+Abilities: +4000 Power Attack, Can't Attack players, can attack untapped
+Mana Cost: 6
+Power: 5000
+Rarity: Super Rare
+Ways to Acquire: 9 piece Creature Card in Rusty's campaign 
+
+Name: Balbaro, Armored Cannon
+Civilization: Fire
+Race: Human
+Abilities: Evolution, +2000 attack from other humans
+Mana Cost: 3
+Power: 3000
+Rarity: Uncommon
+Ways to Acquire: Starter Deck
+
+Name: Bolshack Dragon
+Civilization: Fire
+Race: Armored Dragon
+Abilities: +1000 for each fire in graveyard, Double breaker
+Mana Cost: 6
+Power: 6000
+Rarity: Very Rare
+Ways to Acquire: Choose from Knight as Signature card for Rusty
+
+Name: Braid Claw, Deadly Fighter
+Civilization: Fire
+Race: Dragonoid
+Abilities: Auto Attack
+Mana Cost: 1
+Power: 1000
+Rarity: Common
+Ways to Acquire: Starter Deck
+
+Name: Brawler Zyler
+Civilization: Fire
+Race: Human
+Abilities: +2000 Attack
+Mana Cost: 2
+Power: 1000
+Rarity: Common
+Ways to Acquire: Starter Deck
+
+Spell: Burning Power
+Civilization: Fire
+Abilities: power attack +2000 for turn for 1 creature
+Mana Cost: 1
+Rarity: Common
+
+Spell: Burst Shot
+Civilization: Fire
+Abilities: Shield Trigger, Destroy all Creatures Power 2000 or less
+Mana Cost: 6
+Rarity: Uncommon
+
+Spell: Crimson Hammer
+Civilization: Fire
+Abilities: Destroy 1 creature power 2000 or less
+Mana Cost: 2
+Rarity: Common
+
+Name: Curatops, Cavalry General
+Civilization: Fire
+Race: Dragonoid
+Abilities: can attack untapped
+Mana Cost: 3
+Power: 2000
+Rarity: Uncommon
+Ways to Acquire: Starter Deck
+
+Name: Dude Joe, Explosive
+Civilization: Fire
+Race: Human
+Abilities: none
+Mana Cost: 3
+Power: 3000
+Rarity: Common
+Ways to Acquire: Starter Deck
+
+Name: Fighter Ucarn, Explosive
+Civilization: Fire
+Race: Dragonoid
+Abilities: lose 2 mana, Double Breaker
+Mana Cost: 5
+Power: 9000
+Rarity: Rare
+Ways to Acquire: Starter Deck, Given to Rusty by Marcus in Rusty's campaign. 
+
+Name: Fire Sweeper Burning Hellion
+Civilization: Fire
+Race: Dragonoid
+Abilities: +2000 Power Attack
+Mana Cost: 4
+Power: 3000
+Rarity: Common
+Ways to Acquire: Starter Deck
+
+Name: Flametropus
+Civilization: Fire 
+Race: Rock Beast
+Abilities: +3000 Attack, Double Breaker, for 1 mana
+Mana Cost: 4
+Power: 3000
+Rarity: Rare
+Ways to Acquire: Starter Deck
+
+Name: Galklife Dragon
+Civilization: Fire 
+Race: Armored Dragon
+Abilities: Destroy all Light creatures powe 4000 or less, Double Breaker
+Mana Cost: 7
+Power: 6000
+Rarity: Super Rare
+Ways to Acquire:
+
+Name: Garkago Dragon
+Civilization: Fire
+Race: Armored Dragon
+Abilities: can attack untapped, +1000 for your other Fire creatures, Double Breaker
+Mana Cost: 7
+Power: 6000
+Rarity: Super Rare
+Ways to Acquire:
+
+Name: Gatling Skyterror
+Civilization: Fire
+Race: Armored Wyvern
+Abilities: Can attack untapped, Double breaker
+Mana cost: 7
+Power: 7000
+Rarity: Very Rare
+Ways to Acquire: Trade with Tuba for Xeno Mantis with Rusty, choose from Knight
+
+Name: Immortal Baron, Vorg
+Civilization: Fire
+Race: Human
+Abilities: none
+Mana Cost: 2
+Power: 2000
+Rarity: Common
+Ways to Acquire: Starter Deck
+
+Spell: Magma Gazer
+Civilization: Fire
+Abilities: Give 1 creature Power Attacker +4000 and Double Breaker for 1 turn
+Mana Cost: 3
+Rarity: Rare
+
+Name: Muramasa, Duke of Blades
+Civilization: Fire 
+Race: Human
+Abilities: On attack, destroy an opponent's creature with Power 2000 or less
+Mana Cost: 6
+Power: 3000
+Rarity: Uncommon
+Ways to Acquire: Starter Deck
+
+Name: Nomad Hero Gigio
+Civilization: Fire
+Race: Machine Eater
+Abilities: can attack untapped
+Mana Cost: 5
+Power: 3000
+Rarity: Rare
+Ways to Acquire: Starter Deck
+
+Name: Rothus, the Traveler
+Civilization: Fire
+Race: Armorloid
+Abilities: Each player chooses 1 of their creatures and destroys it
+Mana Cost: 4
+Power: 4000
+Rarity: Rare
+Ways to Acquire: Starter Deck
+
+Spell: Rumble Gate
+Civilization: Fire
+Abilities: Each of you creatures gets +1000 power and can attack untapped creatures this turn
+Mana Cost: 4
+Rarity: Common
+
+Name: Scarlet Skyterror
+Civilization: Fire
+Race: Armored Wyvern
+Abilities: When played, Destroy all creatures that have "blocker"
+Mana Cost: 8
+Power: 3000
+Rarity: Super Rare
+Ways to Acquire:
+
+Name: Stonesaur
+Civilization: Fire
+Race: Rock Beast
+Abilities: +2000 Power Attack
+Mana Cost: 5
+Power: 4000
+Rarity: Uncommon
+Ways to Acquire: Starter Deck
+
+Name: Uberdragon Jabaha
+Civilization: Fire
+Race: Armored Dragon
+Abilities: Evolution, Double Breaker, each of your other Fire creatures has Power Attacker +2000
+Mana Cost: 7
+Power: 11000
+Rarity: Very Rare
+Ways to Acquire:
+
+Spell: Volcanic Arrows
+Civilization: Fire
+Abilities: Shield Trigger, Destroy 1 creature with power 6000 or less. Lose 1 shield.
+Mana Cost: 2
+Rarity: Common
+
+Name: Volcanodon, Super Explosive
+Civilization: Fire
+Race: Dragonoid
+Abilities: Power Attacker +4000
+Mana Cost: 4
+Power: 2000
+Rarity: Uncommon
+Ways to Acquire: Starter Deck
+
+Name: Aeris, Flight Elemental
+Civilization: Light
+Race: Angel Command
+Abilities: Can't Attack players, can attack untapped darkness creatures
+Mana Cost: 5
+Power: 9000
+Rarity: Rare
+Ways to Acquire: Starter Deck, Win Luc's School Tournament
+
+Name: Alcadeias, Lord of Spirits
+Civilization: Light
+Race: Angel Command
+Abilities: Evolution, Players can't cast non-Light Spells, Double Breaker
+Mana Cost: 6
+Power: 12500
+Rarity: Very Rare
+Ways to Acquire:
+
+Name: Aless, the Oracle
+Civilization: Light
+Race: Light Bringer
+Abilities: add this card to shields when destroyed
+Mana Cost: 6
+Power: 1000
+Rarity: Common
+Ways to Acquire: Starter Deck
+
+Name: Dia Nork, Moonlight Guardian
+Civilization: Light
+Race: Guardian
+Abilities: Blocker, Can't Attack players
+Mana Cost: 4
+Power: 5000
+Rarity: Rare
+Ways to Acquire: Starter Deck, Win Luc's School Tournament
+
+Name: Emerald Grass
+Civilization: Light
+Race: Starlight Tree
+Abilities: Blocker, Can't Attack players
+Mana Cost: 2
+Power: 3000
+Rarity: Common
+Ways to Acquire: Starter Deck
+
+Name: Ethel, Star Sea Elemental
+Civilization: Light
+Race: Angel Command
+Abilities: Can't be blocked
+Mana Cost: 6
+Power: 5500
+Rarity: Very Rare
+Ways to Acquire:
+
+Name: Frei, Vizier of Air
+Civilization: Light
+Race: Initiate
+Abilities: Fast Untap
+Mana Cost: 4
+Power: 3000
+Rarity: Uncommon
+Ways to Acquire: Starter Deck
+
+Name: Hanusa, Radiance Elemental
+Civilization: Light
+Race: Angel Command
+Abilities: Double Breaker
+Mana Cost: 7
+Power: 9500
+Rarity: Super Rare
+Ways to Acquire: Choose from Knight as Luc's signature creature
+
+Spell: Holy Awe
+Civilization: Light
+Abilities: Shield Trigger, Tap all opponent's creatures
+Mana Cost: 6
+Rarity: Rare
+
+Name: Iere, Vizier of Bullets
+Civilization: Light
+Race: Initiate
+Abilities: none
+Mana Cost: 3
+Power: 3000
+Rarity: Common
+Ways to Acquire: Starter Deck
+
+Name: Illium, Electric Guardian
+Civilization: Light
+Race: Guardian
+Abilities: Blocker, Can't attack players, fast untap
+Mana Cost: 6
+Power: 6500
+Rarity: Super Rare
+Ways to Acquire: Creature Card in Luc's campaign
+
+Name: Ladia Bale, the Inspirational
+Civilization: Light
+Race: Guardian
+Abilities: Evolution, Blocker, Double Breaker
+Mana Cost: 6
+Power: 9500
+Rarity: Super Rare
+Ways to Acquire:
+
+Name: Lah, Purification Enforcer
+Civilization: Light
+Race: Berserker
+Abilities: none
+Mana Cost: 5
+Power: 5500
+Rarity: Rare
+Ways to Acquire: Starter Deck, Win Luc's school tournament
+
+Name: Lok, Vizier of Hunting
+Civilization: Light
+Race: Initiate
+Abilities: none
+Mana Cost: 4
+Power: 4000
+Rarity: Uncommon
+Ways to Acquire: Starter Deck
+
+Name: Magris, Vizier of Magnetism
+Civilization: Light
+Race: Initiate
+Abilities: On play, Draw 1 card
+Mana Cost: 4
+Power: 3000
+Rarity: Common
+Ways to Acquire: Starter Deck
+
+Name: Miar, Comet Elemental
+Civilization: Light
+Race: Angel Command
+Abilities: Double Breaker
+Mana Cost: 8
+Power: 11500
+Rarity: Super Rare
+Ways to Acquire: Choose from Knight as Signature Creature for Luc
+
+Name: Miele, Vizier of Lightning
+Civilization: Light
+Race: Initiate
+Abilities: Tap 1 of opponent's creatures
+Mana Cost: 3
+Power: 1000
+Rarity: Common
+Ways to Acquire: Starter Deck
+
+Name: Mist Rias, Sonic Guardian
+Civilization: Light
+Race: Guardian
+Abilities: Whenever another creature is played, you may draw a card
+Mana Cost: 5
+Power: 2000
+Rarity: Uncommon
+Ways to Acquire: Starter Deck
+
+Name: Ouks, Vizier of Restoration
+Civilization: Light
+Race: Initiate
+Abilities: add to shields when destroyed
+Mana Cost: 5
+Power: 1000
+Rarity: Rare
+Ways to Acquire: Starter Deck
+
+Name: Raza Vega, Thunder Guardian
+Civilization: Light
+Race: Guardian
+Abilities: Blocker, add to shields when destroyed
+Mana Cost: 10
+Power: 3000
+Rarity: Rare
+Ways to Acquire:
+
+Name: Re Bil, Seeker of Archery
+Civilization: Light
+Race: Mecha Thunder
+Abilities: Double Breaker, each other Light creature in the battle zone gets +2000 power
+Mana Cost: 7
+Power: 6000
+Rarity: Uncommon
+Ways to Acquire: Starter Deck
+
+Spell: Screaming Sunburst
+Civilization: Light
+Abilities: Tap all creatures that aren't Light
+Mana Cost: 3
+Rarity: Uncommon
+
+Name: Sieg Balicula, the Intense
+Civilization: Light
+Race: Initiate
+Abilities: Evolution, each of your other Light creatures has "blocker"
+Mana Cost: 3
+Power: 5000
+Rarity: Very Rare
+Ways to Acquire:
+
+Spell: Solar Ray
+Civilization: Light
+Abilities: Shield Trigger, tap 1 creature
+Mana Cost: 2
+Rarity: Common
+
+Spell: Sonic Wing
+Civilization: Light
+Abilities: 1 of your creatures can't be blocked for 1 turn
+Mana Cost: 3
+Rarity: Common
+
+Spell: Sundrop Armor
+Civilization: Light
+Abilities: Add a Card from your Hand to your shields
+Mana Cost: 4
+Rarity: Common
+
+Name: Urth, Purifying Elemental
+Civilization: Light
+Race: Angel Command
+Abilities: Double Breaker, end of turn untap
+Mana Cost: 6
+Power: 6000
+Rarity: Super Rare
+Ways to Acquire: Choose from Knight as signature creature for Luc
+
+Spell: Whisking Whirlwind
+Civilization: Light
+Abilities: untap all creatures at the end of your turn
+Mana Cost: 1
+Rarity: Common
+
+Spell: Aura Blast
+Civilization: Nature
+Abilities: each of your creatures gets Power Attacker  +2000 until the end of the turn
+Mana Cost: 4
+Rarity: Rare
+
+Name: Barkwhip, the Smasher
+Civilization: Nature
+Race: Beast Folk
+Abilities: Evolution, while this creature is tapped, each of your other Beast Folk get +2000 power
+Mana Cost: 2
+Power: 5000
+Rarity: Uncommon
+Ways to Acquire: Starter Deck
+
+Name: Bronze Arm Tribe
+Civilization: Nature
+Race: Beast Folk
+Abilities: Add the top card of your deck to mana
+Mana Cost: 3
+Power: 1000
+Rarity: Common
+Ways to Acquire: Starter Deck
+
+Name: Burning Mane
+Civilization: Nature
+Race: Beast Folk
+Abilities: none
+Mana Cost: 2
+Power: 2000
+Rarity: Common
+Ways to Acquire: Starter Deck
+
+Name: Dawn Giant
+Civilization: Nature
+Race: Giant
+Abilities: Can't Attack creatures, Double Breaker
+Mana Cost: 7
+Power: 11000
+Rarity: Rare
+Ways to Acquire: Starter Deck
+
+Name: Deathblade Beetle
+Civilization: Nature
+Race: Giant Insect
+Abilities: Power Attacker +4000, Double Breaker
+Mana Cost: 5
+Power: 3000
+Rarity: Super Rare
+Ways to Acquire: Choose from Knight as Signature card for Trey
+
+Name: Earthstomp Giant
+Civilization: Nature
+Race: Giant
+Abilities: Return creatures from your Mana zone to your hand, Double Breaker
+Mana Cost: 5
+Power: 8000
+Rarity: Super Rare
+Ways to Acquire: Choose from Knight as your signature card for Trey
+
+Name: Elf-X
+Civilization: Nature 
+Race: Tree Folk
+Abilities: Your creatures each cost 1 less to summon. They can't cost less than 1.
+Mana Cost: 4
+Power: 2000
+Rarity: Rare
+Ways to Acquire: Starter Deck
+
+Name: Gigamantis
+Civilization: Nature
+Race: Giant Insect
+Abilities: Evolution, if another of your Nature creatures would be destroyed, put it to mana instead.
+Mana Cost: 4
+Power: 5000
+Rarity: Very Rare
+Ways to Acquire:
+
+Name: Golden Wing Striker
+Civilization: Nature
+Race: Beast Folk
+Abilities: Power Attacker +2000
+Mana Cost: 3
+Power: 2000
+Rarity: Common
+Ways to Acquire: Starter Deck
+
+Name: Gor, Primal Hunter
+Civilization: Nature
+Race: Beast Folk
+Abilities: Opponent chooses 2 cards in mana zone and puts them into their graveyard
+Mana Cost: 7
+Power: 2000
+Rarity: Super Rare
+Ways to Acquire: The 9 piece Creature card in Trey's campaign
+
+Spell: Mana Crisis
+Civilization: Nature
+Abilities: Shield Trigger, your opponent losses 1 Mana
+Mana Cost: 4
+Rarity: Uncommon
+
+Spell: Mana Nexus
+Civilization: Nature
+Abilities: Shield Trigger, add a card from Mana zone to shields
+Mana Cost: 4
+Rarity: Uncommon
+
+Name: Mighty Shouter
+Civilization: Nature
+Race: Beast Folk
+Abilities: send this card to Mana when destroyed
+Mana Cost: 3
+Power: 2000
+Rarity: Common
+Ways to Acquire: Starter Deck
+
+Spell: Mystic Inscription
+Civilization: Nature
+Abilities: Add top card from deck to shields
+Mana Cost: 6
+Rarity: Rare
+
+Spell: Natural Snare
+Civilization: Nature
+Abilities: Shield Trigger, move one of your opponents creatures to mana
+Mana Cost: 6
+Rarity: Rare
+
+Name: Poisonous Dahlia
+Civilization: Nature
+Race: Tree Folk
+Abilities: Can't attack players
+Mana Cost: 4
+Power: 5000
+Rarity: Uncommon
+Ways to Acquire: Starter Deck
+
+Name: Masked Pomegranate
+Civilization: Nature
+Race: Tree Folk
+Abilities: gets +1000 power for each of your other nature creatures, can't be blocked by power 4000 or less
+Mana Cost: 5
+Power: 1000
+Rarity: Uncommon
+Ways to Acquire: Starter Deck
+
+Name: Red-Eye Scorpion
+Civilization: Nature
+Race: Giant Insect
+Abilities: goes to mana when destroyed
+Mana Cost: 5
+Power: 4000
+Rarity: Rare
+Ways to Acquire: Starter Deck
+
+Name: Roaring Great-Horn
+Civilization: Nature
+Race: Horned Beast
+Abilities: Power Attackerer +2000, Double Breaker
+Mana Cost: 7
+Power: 8000
+Rarity: Super Rare
+Ways to Acquire: Choose from Knight as signature card for Trey
+
+Name: Stampeding Longhorn
+Civilization: Nature
+Race: Horned Beast
+Abilities: Can't be blocked power 3000 or less
+Mana Cost: 5
+Power: 4000
+Rarity: Rare
+Ways to Acquire: Starter Deck
+
+Name: Silver Axe
+Civilization: Nature
+Race: Beast Folk
+Abilities: When this attacks, put top card of deck to mana
+Mana Cost: 3
+Power: 1000
+Rarity: Common
+Ways to Acquire: Starter Deck
+
+Name: Silver Fist
+Civilization: Nature
+Race: Beast Folk
+Abilities: Power Attacker +2000
+Mana Cost: 4
+Power: 3000
+Rarity: Uncommon
+Ways to Acquire: Starter Deck
+
+Name: Steel Smasher
+Civilization: Nature
+Race: Beast Folk
+Abilities: Can't Attack players
+Mana Cost: 2
+Power: 3000
+Rarity: Common
+Ways to Acquire: Starter Deck
+
+Name: Sword Butterfly
+Civilization: Nature
+Race: Giant Insect
+Abilities: Power Attacker +3000
+Mana Cost: 3
+Power: 2000
+Rarity: Common
+Ways to Acquire: Starter Deck
+
+Name: Thorny Mandra
+Civilization: Nature
+Race: Tree Folk
+Abilities: On play, move 1 creature from your graveyard to your mana zone
+Mana Cost: 5
+Power: 4000
+Rarity: Very Rare
+Ways to Acquire:
+
+Spell: Ultimate Force
+Civilization: Nature
+Abilities: top 2 cards from your deck to your Mana Zone
+Mana Cost: 5
+Rarity: Common
+
+Name: Xeno Mantis
+Civilization: Nature
+Race: Giant Insect
+Abilities: Can't be blocked, Double Breaker
+Mana Cost: 7
+Power: 6000
+Rarity: Very Rare
+Ways to Acquire: Trade David for King Ripped-Hide in Rusty Campaign 
+
+Name: Aqua Deformer
+Civilization: Water
+Race: Liquid People
+Abilities: Each player chooses 2 cards from mana and returns them to hand.
+Mana Cost: 8
+Power: 3000
+Rarity: Rare
+Ways to Acquire: Starter Deck
+
+Name: Aqua Hulcus
+Civilization: Water
+Race: Liquid People
+Abilities: On play draw 1 card
+Mana Cost: 3
+Power: 2000
+Rarity: Common
+Ways to Acquire: Starter Deck
+
+Name: Aqua Jolter
+Civilization: Water
+Race: Liquid People
+Abilities: Shield Trigger
+Mana Cost: 3
+Power: 2000
+Rarity: Common
+Ways to Acquire: Starter Deck
+
+Name: Aqua Knight
+Civilization: Water
+Race: Liquid People
+Abilities: Returns to hand when destroyed
+Mana Cost: 5
+Power: 4000
+Rarity: Rare
+Ways to Acquire: Starter Deck
+
+Name: Aqua Shooter
+Civilization: Water
+Race: Liquid People
+Abilities: Blocker
+Mana Cost: 4
+Power: 2000
+Rarity: Common
+Ways to Acquire: Starter Deck
+
+Name: Aqua Sniper
+Civilization: Water
+Race: Liquid People
+Abilities: Return up to 2 creatures to owners' hands
+Mana Cost: 8
+Power: 5000
+Rarity: Super Rare
+Ways to Acquire: Choose from Knight as a signature card for Rebecca
+
+Name: Aqua Soldier
+Civilization: Water
+Race: Liquid People
+Abilities: Returns to hand when destroyed
+Mana Cost: 3
+Power: 1000
+Rarity: Uncommon
+Ways to Acquire: Starter Deck
+
+Spell: Brain Serum
+Civilization: Water
+Abilities: Shield Trigger, Draw 2 cards
+Mana Cost: 4
+Rarity: Uncommon
+
+Name: Candy Drop
+Civilization: Water
+Race: Cyber Virus
+Abilities: Can't be blocked
+Mana Cost: 3
+Power: 1000
+Rarity: Common
+Ways to Acquire: Starter Deck
+
+Name: Crystal Lancer
+Civilization: Water
+Race: Liquid People
+Abilities: Evolution, Can't be blocked, Double Breaker
+Mana Cost: 6
+Power: 8000
+Rarity: Uncommon
+Ways to Acquire: Starter Deck
+
+Name: Hypersquid Walter
+Civilization: Water
+Race: Cyber Lord
+Abilities: Draw 1 Card on Attack
+Mana Cost: 3
+Power: 1000
+Rarity: Rare
+Ways to Acquire: Starter Deck
+
+Name: King Ambergris
+Civilization: Water
+Race: Leviathan
+Abilities: Whenever one of your other water creatures in the battle zone would be destroyed, return it to your hand instead.
+Mana Cost: 6
+Power: 5000
+Rarity: Super Rare
+Ways to Acquire: The 9 piece creature card in Rebecca's campaign
+
+Name: King Coral
+Civilization: Water
+Race: Leviathan
+Abilities: Blocker
+Mana Cost: 3
+Power: 1000
+Rarity: Uncommon
+Ways to Acquire: Starter Deck
+
+Name: King Depthcon
+Civilization: Water
+Race: Leviathan
+Abilities: Can't be blocked, Double Breaker
+Mana Cost: 7
+Power: 6000
+Rarity: Super Rare
+Ways to Acquire:
+
+Name: King Nautilus
+Civilization: Water
+Race: Leviathan
+Abilities: Liquid people can't be blocked, Double Breaker
+Mana Cost: 8
+Power: 6000
+Rarity: Rare
+Ways to Acquire: Starter Deck
+
+Name: King Ripped-Hide
+Civilization: Water
+Race: Leviathan
+Abilities: draw up to 2 cards on play
+Mana Cost: 7
+Power: 5000
+Rarity: Very Rare
+Ways to Acquire: Defeat Kiki in Rusty's campaign, Choose from Knight as a 
+signature card for Rebecca
+
+Name: Legendary Bynor
+Civilization: Water
+Race: Leviathan
+Abilities: Evolution, Double Breaker, your other water creatures can't be blocked
+Mana Cost: 6
+Power: 8000
+Rarity: Very Rare
+Ways to Acquire: Choose from Knight as a signature card for Rebecca 
+
+Name: Phantom Fish
+Civilization: Water
+Race: Gel Fish
+Abilities: Blocker, Can't Attack
+Mana Cost: 3
+Power: 4000
+Rarity: Common
+Ways to Acquire: Starter Deck
+
+Name: Plasma Chaser
+Civilization: Water
+Race: Gel Fish
+Abilities: On attack, Draw a card for each creature your opponent has
+Mana Cost: 6
+Power: 4000
+Rarity: Very Rare
+Ways to Acquire:
+
+Spell: Psychic Shaper
+Civilization: Water
+Abilities: Reveal to 4 cards, Water to hand, rest to graveyard
+Mana Cost: 6
+Rarity: Rare
+
+Name: Revolver Fish
+Civilization: Water
+Race: Gel Fish
+Abilities: Blocker, Can't Attack
+Mana Cost: 4
+Power: 5000
+Rarity: Uncommon
+Ways to Acquire: Starter Deck
+
+Name: Seamine
+Civilization: Water 
+Race: Fish
+Abilities: Blocker
+Mana Cost: 6
+Power: 4000
+Rarity: Very Rare
+Ways to Acquire:
+
+Spell: Spiral Gate
+Civilization: Water
+Abilities: Shield Trigger, return 1 creature to it's owner's hand
+Mana Cost: 2
+Rarity: Common
+
+Spell: Teleportation
+Civilization: Water
+Abilities: return 2 creatures to their owner's hands
+Mana Cost: 5
+Rarity: Rare
+
+Spell: Thought Probe
+Civilization: Water
+Abilities: Shield Trigger, draw 3 cards if your opponent has 3+ creatures
+Mana Cost: 4
+Rarity: Uncommon
+
+Spell: Virtual Tripwire
+Civilization: Water
+Abilities: tap one of your opponent's creatures
+Mana Cost: 3
+Rarity: Common
