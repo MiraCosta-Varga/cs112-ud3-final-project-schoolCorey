@@ -84,11 +84,5 @@ public class ViewEvents {
 
     }
 
-    @FXML
-    public void debugComboBoxAction(ActionEvent actionEvent){
-
-        int mikon = 359;
-    }
-
 
 }

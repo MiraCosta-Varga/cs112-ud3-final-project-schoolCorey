@@ -27,11 +27,6 @@ import java.io.IOException;
 
 public class StatsInput extends InputScreen{
 
-    public static final int SPINNER_MIN = 0;
-    public static final int SPINNER_MAX = 59;
-
-    private boolean amAddingEvent;
-    private RewardEvent rewardEvent;
 
     @FXML
     private TextField repTextField;
@@ -124,7 +119,10 @@ public class StatsInput extends InputScreen{
      * @throws IOException from FXML.load() in UtilityBelt.changeInputScene()
      */
     public void onBackButtonClick(ActionEvent actionEvent) throws IOException {
-        UtilityBelt.changeInputScene("card-reward-input.fxml",rewardEvent,amAddingEvent,actionEvent);
+        if(actionEvent.getSource()==backButton){
+            UtilityBelt.changeInputScene("card-reward-input.fxml",rewardEvent,amAddingEvent,actionEvent);
+        }
+
     }
 
     /**
@@ -133,7 +131,10 @@ public class StatsInput extends InputScreen{
 
      */
     public void onCancelClick(ActionEvent actionEvent) throws IOException{
-        UtilityBelt.createCancelPopup(actionEvent);
+        if(actionEvent.getSource()==cancelButton){
+            UtilityBelt.createCancelPopup(actionEvent);
+        }
+
     }
 
     /**
@@ -146,28 +147,31 @@ public class StatsInput extends InputScreen{
      * @throws IOException from FXML.load() in UtilityBelt.changeInputScene()
      */
     public void onNextClick(ActionEvent actionEvent) throws IOException{
-        try{
-            int creaturesLostPlayer = Integer.parseInt(creaturesYTextField.getText());
-            int creaturesLostOpp = Integer.parseInt(creaturesOTextField.getText());
-            int shieldsLostPlayer = Integer.parseInt(shieldsYTextField.getText());
-            int shieldsLostOpp = Integer.parseInt(shieldsOTextField.getText());
-            int playerWinsLocal = Integer.parseInt(mWinsYTextField.getText());
-            int playerLossesLocal = Integer.parseInt(mWinsOTextField.getText());
-            int playerWinsTotal = Integer.parseInt(tWinsYTextField.getText());
-            int playerLossesTotal = Integer.parseInt(tWinsOTextField.getText());
-            int minutes = Integer.parseInt(minuteTextField.getText());
-            int seconds = Integer.parseInt(secondTextField.getText());
-            DMBattleStats stats = new DMBattleStats(creaturesLostPlayer,creaturesLostOpp,shieldsLostPlayer,shieldsLostOpp,playerWinsLocal,playerLossesLocal,playerWinsTotal,playerLossesTotal,minutes,seconds);
-            rewardEvent.setRewardMods(stats);
-            rewardEvent.setCurrency(Integer.parseInt(repTextField.getText()));
-            UtilityBelt.changeInputScene("confirm-page.fxml",rewardEvent,amAddingEvent,actionEvent);
+        if(actionEvent.getSource()==confirmButton){
+            try{
+                int creaturesLostPlayer = Integer.parseInt(creaturesYTextField.getText());
+                int creaturesLostOpp = Integer.parseInt(creaturesOTextField.getText());
+                int shieldsLostPlayer = Integer.parseInt(shieldsYTextField.getText());
+                int shieldsLostOpp = Integer.parseInt(shieldsOTextField.getText());
+                int playerWinsLocal = Integer.parseInt(mWinsYTextField.getText());
+                int playerLossesLocal = Integer.parseInt(mWinsOTextField.getText());
+                int playerWinsTotal = Integer.parseInt(tWinsYTextField.getText());
+                int playerLossesTotal = Integer.parseInt(tWinsOTextField.getText());
+                int minutes = Integer.parseInt(minuteTextField.getText());
+                int seconds = Integer.parseInt(secondTextField.getText());
+                DMBattleStats stats = new DMBattleStats(creaturesLostPlayer,creaturesLostOpp,shieldsLostPlayer,shieldsLostOpp,playerWinsLocal,playerLossesLocal,playerWinsTotal,playerLossesTotal,minutes,seconds);
+                rewardEvent.setRewardMods(stats);
+                rewardEvent.setCurrency(Integer.parseInt(repTextField.getText()));
+                UtilityBelt.changeInputScene("confirm-page.fxml",rewardEvent,amAddingEvent,actionEvent);
 
-        }catch (NumberFormatException nfe){
-            UtilityBelt.createMessagePopup("Invalid stats.\nMost likely one or more fields were empty.");
+            }catch (NumberFormatException nfe){
+                UtilityBelt.createMessagePopup("Invalid stats.\nMost likely one or more fields were empty.");
 
-        }catch (IllegalArgumentException iae){
-            UtilityBelt.createMessagePopup("Invalid stats.\nMost likely a negative number was entered.");
+            }catch (IllegalArgumentException iae){
+                UtilityBelt.createMessagePopup("Invalid stats.\nMost likely a negative number was entered.");
+            }
         }
+
 
     }
 

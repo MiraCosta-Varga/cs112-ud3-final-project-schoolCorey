@@ -12,12 +12,12 @@ import javafx.stage.Stage;
 public class CancelConfirmation {
     //Setup Gui
     @FXML
-    Button yesButton;
+    private Button yesButton;
     @FXML
-    Button noButton;
+    private Button noButton;
 
     //variables from others
-    Stage lastStage; // to close that window and this one
+    private Stage lastStage; // to close that window and this one
 
     /**
      * Sets up stage before viewing. Links the last stage so it can close both.
@@ -33,9 +33,12 @@ public class CancelConfirmation {
      */
     @FXML
     public void onYesClick(ActionEvent actionEvent){
-        lastStage.close();
-        Stage stage = (Stage) yesButton.getScene().getWindow();
-        stage.close();
+        if (actionEvent.getSource()==yesButton){
+            lastStage.close();
+            Stage stage = (Stage) yesButton.getScene().getWindow();
+            stage.close();
+        }
+
     }
 
     /**
@@ -44,8 +47,11 @@ public class CancelConfirmation {
      */
     @FXML
     public void onNoClick(ActionEvent actionEvent){
-        Stage stage = (Stage) noButton.getScene().getWindow();
-        stage.close();
+        if(actionEvent.getSource()==noButton){
+            Stage stage = (Stage) noButton.getScene().getWindow();
+            stage.close();
+        }
+
     }
 
 }

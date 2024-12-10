@@ -28,10 +28,6 @@ public class ConfirmPage extends InputScreen{
     public static final int CARD_2_INDEX = 1;
     public static final int CARD_3_INDEX = 2;
 
-    private boolean amAddingEvent;
-    private RewardEvent rewardEvent;
-
-
     //setup GUi
     @FXML
     private Label repPointsLabel;

@@ -26,18 +26,15 @@ public class OpponentInput extends InputScreen{
 
     public static final int NOT_FOUND = -1;
 
-    RewardEvent rewardEvent;
-    boolean amAddingEvent;
-
     //Setup GUI components
     @FXML
-    ComboBox<String> locationComboBox;
+    private ComboBox<String> locationComboBox;
     @FXML
-    ComboBox<String> nameComboBox;
+    private ComboBox<String> nameComboBox;
     @FXML
-    Button backButton;
+    private Button backButton;
     @FXML
-    Button nextButton;
+    private Button nextButton;
 
 
     /**

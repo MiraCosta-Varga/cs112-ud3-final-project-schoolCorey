@@ -11,6 +11,9 @@ package cs112.ud3.controllers;
 import cs112.ud3.models.RewardEvent;
 
 public abstract class InputScreen {
+    protected RewardEvent rewardEvent;
+    protected boolean amAddingEvent;
+
     /**
      * Sets up scene before it is shown, using the status of the current RewardEvent and
      * whether or not the user is currently adding an event.

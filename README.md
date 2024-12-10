@@ -11,7 +11,7 @@ Place the animated image of your project demo here!
 
 ## UML Diagram
 
-Place your UML diagram image here! Make sure they're updated to be accurate to your final project!
+![UMLDiagram](src/main/resources/cs112/ud3/UML.drawio.png)
 
 ## Wireframe
 

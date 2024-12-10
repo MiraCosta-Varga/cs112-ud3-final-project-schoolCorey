@@ -38,8 +38,6 @@ public class CardRewardInput extends InputScreen{
     /***INSTANCE VARS***/
     //used to hold onto our combo box selections until we confirm our choices.
     private DMCard[] selectedCards = new DMCard[CARDS_PER_EVENT];
-    private RewardEvent rewardEvent;
-    private boolean amAddingEvent;
 
     /***GUI components***/
     @FXML

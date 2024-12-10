@@ -15,10 +15,10 @@ import javafx.stage.Stage;
 public class ErrorPopup {
 
     @FXML
-    Label messageLabel;
+    private Label messageLabel;
 
     @FXML
-    Button okButton;
+    private Button okButton;
 
     /**
      * Sets up the stage by determining the message to be displayed to the user
