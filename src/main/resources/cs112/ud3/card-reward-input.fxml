@@ -56,12 +56,12 @@
                   <ComboBox fx:id="cardRewardComboBox3" editable="true" onAction="#onComboBoxAction" onKeyReleased="#keyPressed" prefWidth="150.0" promptText="Type Card Name" />
                </children>
             </VBox>
-            <ImageView fx:id="card1image" fitHeight="212.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <ImageView fx:id="card1image" fitHeight="151.0" fitWidth="179.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <image>
                   <Image url="@cardImages/0.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="card2image" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <ImageView fx:id="card2image" fitHeight="150.0" fitWidth="185.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <image>
                   <Image url="@cardImages/0.png" />
                </image>
@@ -69,7 +69,7 @@
                   <Insets />
                </GridPane.margin>
             </ImageView>
-            <ImageView fx:id="card3image" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <ImageView fx:id="card3image" fitHeight="153.0" fitWidth="203.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <image>
                   <Image url="@cardImages/0.png" />
                </image>
